@@ -27,26 +27,21 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="<?php echo base_url('home'); ?>">All Categories</a></li>
 			</ul>
-
+			<?php
+			if ($this->session->userdata('user_id')) { ?>
 			<ul class="nav navbar-nav navbar-right">
-				<?php
-				if ($this->session->userdata('user_id')) { ?>
+
 				<li><a class="navbar-brand" href="<?php echo base_url('login/logout'); ?>">Logout</a></li>
-				<?php
-				} else { ?>
-				<li><a class="navbar-brand" href="<?php echo base_url('login'); ?>">Login</a></li>
-				<?php } ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<?php echo base_url('home/my_order'); ?>">My Order</a></li>
 			</ul>
-
-			<!-- <ul class="nav navbar-nav navbar-right">
-				<li>
-					<a class="navbar-brand" href="#">logout</a>
-				</li>
-			</ul> -->
+			<?php
+			} else { ?>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a class="navbar-brand" href="<?php echo base_url('login'); ?>">Login</a></li>
+			</ul>
+			<?php } ?>
 		</div>
-		<!-- </div> -->
 	</nav>
 </body>

@@ -8,6 +8,7 @@
 	<title>Head</title>
 	<link rel="stylesheet" type="text/css" href="http://localhost/shoppinghub/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="http://localhost/shoppinghub/assets/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost/shoppinghub/assets/css/modal.css">
 	<script src="http://localhost/shoppinghub/assets/icons/font_awesome.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -29,18 +30,21 @@
 
 			<!-- if ($this->session->userdata('user_id')) -->
 
+			<?php
+			if ($this->session->userdata('user_id')) { ?>
 			<ul class="nav navbar-nav navbar-right">
-				<?php
-                if ($this->session->userdata('user_id')) { ?>
+
 				<li><a class="navbar-brand" href="<?php echo base_url('login/logout'); ?>">Logout</a></li>
-				<?php
-                } else { ?>
-				<li><a class="navbar-brand" href="<?php echo base_url('login'); ?>">Login</a></li>
-				<?php } ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<?php echo base_url('home/my_order'); ?>">My Order</a></li>
 			</ul>
+			<?php
+			} else { ?>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a class="navbar-brand" href="<?php echo base_url('login'); ?>">Login</a></li>
+			</ul>
+			<?php } ?>
 		</div>
 		<!-- </div> -->
 	</nav>

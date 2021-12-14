@@ -85,7 +85,8 @@
 								:</label>
 							<div class="controls">
 								<select name="discount_category" required>
-									<option value="value=" <?php echo $gift_info_by_id->discount_category; ?>"">
+									<option value="<?php echo $gift_info_by_id->discount_category; ?>">
+										<?php echo $gift_info_by_id->discount_category; ?>
 									</option>
 									<option value="Customer Service Discount">Customer Service Discount</option>
 									<option value="High Volume Discount">High Volume Discount</option>

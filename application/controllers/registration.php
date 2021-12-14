@@ -20,6 +20,9 @@ class Registration extends CI_Controller
         // print_r($countries);
         // echo "</pre>";
         // exit;
+
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('auth/register', compact('countries'));
     }
 
@@ -107,7 +110,8 @@ class Registration extends CI_Controller
                 $countries[""] = 'Select Country';
                 $countries[$country->id] = $country->countryname;
             }
-
+            $this->load->view('page/primary_header');
+            $this->load->view('page/secondary_header');
             $this->load->view('auth/register', compact('countries'));
             // echo "Register Failed";
         }
@@ -125,8 +129,8 @@ class Registration extends CI_Controller
 
     public function profile_details()
     {
-        $this->load->view('inc/primary_header');
-        $this->load->view('inc/secondary_header');
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('auth/user_profile');
     }
 }

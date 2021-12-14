@@ -10,6 +10,7 @@ class Home extends CI_Controller
         $this->load->model('gift_coupon_model');
         $this->load->model('disc_coupon_model');
         $this->load->helper('text');
+        $this->load->helper('download');
     }
     public function index()
     {
@@ -57,15 +58,15 @@ class Home extends CI_Controller
     {
         $data                  = array();
         $data['cart_contents'] = $this->cart->contents();
-        $this->load->view('inc/primary_header');
-        $this->load->view('inc/secondary_header');
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('page/cart', $data);
     }
     public function customer_shipping()
     {
         $data['cart_contents'] = $this->cart->contents();
-        $this->load->view('inc/primary_header');
-        $this->load->view('inc/secondary_header');
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('page/customer_shipping', $data);
     }
     public function save_shipping_address()
@@ -96,9 +97,9 @@ class Home extends CI_Controller
         $shipp_data['disc_amount']      = $this->input->post('disc-amount');
         $shipp_data['grand_tot']        = $this->input->post('grand-tot');
         $shipp_data['dis_type']         = $this->input->post('dis-type');
-        print_r($shipp_data);
-        echo __LINE__;
-        exit;
+        // print_r($shipp_data);
+        // echo __LINE__;
+        // exit;
 
         $this->form_validation->set_rules('shipping_name', 'Shipping Name', 'trim|required');
         // |is_unique[tbl_shipping.shipping_email]
@@ -126,8 +127,8 @@ class Home extends CI_Controller
     public function checkout()
     {
         $data = array();
-        $this->load->view('inc/primary_header');
-        $this->load->view('inc/secondary_header');
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('page/checkout');
     }
     public function save_order()
@@ -194,8 +195,8 @@ class Home extends CI_Controller
     public function payment()
     {
         $data = array();
-        $this->load->view('inc/primary_header');
-        $this->load->view('inc/secondary_header');
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('page/payment');
     }
 
@@ -225,8 +226,8 @@ class Home extends CI_Controller
             // print_r($data['order_details']);
             // echo "</pre>";
             // exit;
-            $this->load->view('inc/primary_header');
-            $this->load->view('inc/secondary_header');
+            $this->load->view('page/primary_header');
+            $this->load->view('page/secondary_header');
             $this->load->view('page/cust_order_details', $data);
         } else {
             return redirect('login');
@@ -284,32 +285,8 @@ class Home extends CI_Controller
     public function ord_details()
     {
         $data['cart_contents'] = $this->cart->contents();
-        $this->load->view('inc/primary_header');
-        $this->load->view('inc/secondary_header');
+        $this->load->view('page/primary_header');
+        $this->load->view('page/secondary_header');
         $this->load->view('page/product_det_coupon', $data);
     }
-    // public function check_coupon()
-    // {
-    //     $data = array();
-    //     $code = $this->input->post('coupon');
-    //     $data['rowid'] = $this->input->post('rowid');
-    //     $result = $this->gift_coupon_model->get_coupon_discount($code);
-    // $total=$this->cart->total();
-    // $coupon = $result->disc_amount;
-    // print_r($coupon);
-    // exit;
-    // if ($result) {
-    //     if ($result->disc_type == 'amount') {
-
-
-    //     } 
-    //     else if ($result->disc_type == 'percent') {
-    //     }
-    // } else {
-    //     return false;
-    // }
-
-    // $this->cart->update($data);
-    // redirect('home/cart');
-    // }
 }

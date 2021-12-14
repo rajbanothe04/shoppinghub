@@ -1,6 +1,3 @@
-<?php include('first_header.php'); ?>
-<?php include('second_header.php'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <script src="<?php echo base_url('assets/jq/jquery.js'); ?>"></script>

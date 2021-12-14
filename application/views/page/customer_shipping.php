@@ -181,7 +181,7 @@ $(document).ready(function() {
 				$('#balance-amt').text("$" + discount);
 
 				$("#sub-tot").val(subTotal);
-				$("#disc-amount").val(discount);
+				$("#disc-amount").val(subTotal);
 				$("#grand-tot").val(grandTotal);
 				$("#dis-type").val(record.disc_type);
 

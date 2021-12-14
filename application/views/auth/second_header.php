@@ -22,35 +22,23 @@
                         text-white"></i>Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">All Categories</a></li>
+				<li><a href="<?php echo base_url('home'); ?>">All Categories</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Laptop</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Smartphone</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Smart TV</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Fashion</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Home & Kitchen</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Beuty, Toys & More</a></li>
-			</ul>
-			<!-- <ul class="nav navbar-nav navbar-right">
-				<li><a class="navbar-brand" href="<?php base_url('auth'); ?>">Login</a></li>
+			<?php
+			if ($this->session->userdata('user_id')) { ?>
+			<ul class="nav navbar-nav navbar-right">
+
+				<li><a class="navbar-brand" href="<?php echo base_url('login/logout'); ?>">Logout</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a class="navbar-brand" href="#">Register</a>
-				</li>
-			</ul> -->
+				<li><a href="<?php echo base_url('home/my_order'); ?>">My Order</a></li>
+			</ul>
+			<?php
+			} else { ?>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a class="navbar-brand" href="<?php echo base_url('login'); ?>">Login</a></li>
+			</ul>
+			<?php } ?>
 		</div>
-		<!-- </div> -->
 	</nav>
 </body>

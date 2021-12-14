@@ -6,20 +6,14 @@ class User extends CI_Controller
 	{
 		// $this->load->view('hume.php');
 	}
-
 	public function user_detils()
 	{
 		if ($this->session->userdata('user_id')) {
 			$data = $this->session->userdata('user_id');
 			$this->load->model('user_model');
 			$user_data = $this->user_model->get_user_info($data);
-			// $user_data = $this->user_model->get_user_info($data)[0];
-			// echo "<pre>";
-			// print_r($user_data);
-			// echo "</pre>";
-			// exit;
-			$this->load->view('inc/primary_header');
-			$this->load->view('inc/secondary_header');
+			$this->load->view('page/primary_header');
+			$this->load->view('page/secondary_header');
 			$this->load->view('auth/user_profile', compact('user_data'));
 		} else {
 			return redirect('login');
@@ -27,14 +21,8 @@ class User extends CI_Controller
 	}
 	public function find_user($id)
 	{
-		// if ($this->session->userdata('user_id'))
-		// 	$data = $this->session->userdata('user_id');
 		$this->load->model('user_model');
 		$user_data = $this->user_model->user_profile($id);
-		// echo "<pre>";
-		// print_r($user_data);
-		// echo "</pre>";
-		// exit;
 		$this->load->model('registermodel');
 		$country_list = $this->registermodel->loadCountry();
 		foreach ($country_list as $country) {
@@ -45,10 +33,7 @@ class User extends CI_Controller
 	}
 	public function update_user()
 	{
-		// $post = $this->input->post();
-		// echo '<pre>' . print_r($post) . '</pre>';
-		// exit;
-		// $this->load->library('upload');
+
 		if ($this->session->userdata('user_id'))
 			$id = $this->session->userdata('user_id');
 		// $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
@@ -85,45 +70,12 @@ class User extends CI_Controller
 			$post['file'] = $image_path;
 		}
 
-
 		unset($post['submit']); //to remove the submit from array 
 		unset($post['confirm_password']); //to remove the Password confirmation from array 
-
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
 
 		$this->load->model('user_model');
 		$this->user_model->user_update($id, $post);
 		// $this->load->view('public/admin_login');
 		return redirect('user/user_detils');
-		// } else {
-
-
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
-		// // $data = $this->upload->data();
-		// // echo validation_errors();
-		// // exit;
-		// $this->load->model('registermodel');
-		// $country_list = $this->registermodel->loadCountry();
-
-		// foreach ($country_list as $country) {
-		// 	$countries[""] = 'Select Country';
-		// 	$countries[$country->id] = $country->countryname;
-		// }
-
-		// $this->load->view('edit_user', compact('countries'));
-		// echo "Register Failed";
-		// }
-	}
-	public function editor()
-	{
-		$this->load->view('editor');
-	}
-	public function fileupload()
-	{
-		return redirect('jQuery-File-Upload-master/index.html');
 	}
 }

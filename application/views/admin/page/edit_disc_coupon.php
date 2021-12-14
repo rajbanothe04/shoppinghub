@@ -83,7 +83,9 @@
 								:</label>
 							<div class="controls">
 								<select name="discount_category">
-									<option value="<?php echo $disc_info_by_id->discount_category; ?>"></option>
+									<option selected="selected"
+										value="<?php echo $disc_info_by_id->discount_category; ?>">
+										<?php echo $disc_info_by_id->discount_category; ?></option>
 									<option value="Customer Service Discount">Customer Service Discount</option>
 									<option value="High Volume Discount">High Volume Discount</option>
 									<option value="Referral Code Discount">Referral Code Discount</option>

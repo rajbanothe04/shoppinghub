@@ -16,6 +16,8 @@ class ManageOrder extends CI_Controller
     {
         $data                          = array();
         $data['all_manage_order_info'] = $this->manageorder_model->manage_order_info();
+        // print_r($data['all_manage_order_info'][0]);
+        // exit();
         $data['maincontent']           = $this->load->view('admin/page/manage_order', $data, true);
         $this->load->view('admin/master', $data);
     }
@@ -34,6 +36,8 @@ class ManageOrder extends CI_Controller
         $data['order_details_info'] = $this->manageorder_model->orderdetails_info_by_id($order_id);
         $data['order_info']         = $this->manageorder_model->order_info_by_id($order_id);
 
+        // print_r($data);
+        // exit;
         $data['maincontent'] = $this->load->view('admin/page/order_details', $data, true);
         $this->load->view('admin/master', $data);
     }
