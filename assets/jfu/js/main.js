@@ -18,7 +18,7 @@ $(function() {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'http://localhost/uploadapp/upload/json'
+        url: 'http://localhost/shoppinghub/upload/json'
     });
     // Load existing files:
     $('#fileupload').addClass('fileupload-processing');

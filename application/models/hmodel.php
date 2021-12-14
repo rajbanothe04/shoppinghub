@@ -62,18 +62,18 @@ class Hmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tbl_shipping');
-		$this->db->where('shipping_id',$shipid);
+		$this->db->where('shipping_id', $shipid);
 		$result = $this->db->get();
 		return $result->result();
 	}
-	
+
 	public function save_payment_info($data)
 	{
 		$this->db->insert('tbl_payment', $data);
 		return $this->db->insert_id();
 	}
-	
-	
+
+
 
 	public function save_order_info($data)
 	{
@@ -107,8 +107,8 @@ class Hmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tbl_order');
-		$this->db->join('tbl_customer', 'tbl_customer.id = tbl_order.customer_id');
 		$this->db->join('tbl_shipping', 'tbl_shipping.shipping_id = tbl_order.shipping_id');
+		$this->db->join('tbl_customer', 'tbl_customer.id = tbl_order.customer_id');
 		$this->db->join('tbl_order_details', 'tbl_order_details.order_id = tbl_order.order_id');
 		$this->db->join('tbl_product', 'tbl_product.product_id = tbl_order_details.product_id');
 		$this->db->where('tbl_order_details.order_id', $o_id);

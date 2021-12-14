@@ -7,7 +7,8 @@ class Home extends CI_Controller
     {
         parent::__construct();
         $this->load->model('hmodel');
-        $this->load->model('flate_coupon_model');
+        $this->load->model('gift_coupon_model');
+        $this->load->model('disc_coupon_model');
         $this->load->helper('text');
     }
     public function index()
@@ -70,18 +71,18 @@ class Home extends CI_Controller
     public function save_shipping_address()
     {
 
-        $data                     = array();
-        // $data = ($this->input->post());
-        $data['customer_id']   = $this->session->userdata('user_id');
-        $data['order_total'] = $this->input->post('sub-tot');
-        $data['disc_amount'] = $this->input->post('disc-amount');
-        $data['grand_tot'] = $this->input->post('grand-tot');
-        $data['dis_type'] = $this->input->post('dis-type');
-        //  $this->cart->update($data);
-         $this->hmodel->save_coupon_code($data);
+        // $data                     = array();
+        // // $data = ($this->input->post());
+        // $data['customer_id']   = $this->session->userdata('user_id');
+        // $data['order_total'] = $this->input->post('sub-tot');
+        // $data['disc_amount'] = $this->input->post('disc-amount');
+        // $data['grand_tot'] = $this->input->post('grand-tot');
+        // $data['dis_type'] = $this->input->post('dis-type');
+        // //  $this->cart->update($data);
+        // $this->hmodel->save_coupon_code($data);
 
         // $data['cart_contents'] = $this->cart->contents();
-        
+
         $shipp_data                     = array();
         $shipp_data['customer_id']      = $this->session->userdata('user_id');
         $shipp_data['shipping_email']   = $this->input->post('shipping_email');
@@ -95,10 +96,10 @@ class Home extends CI_Controller
         $shipp_data['disc_amount']      = $this->input->post('disc-amount');
         $shipp_data['grand_tot']        = $this->input->post('grand-tot');
         $shipp_data['dis_type']         = $this->input->post('dis-type');
-        // print_r($shipp_data);
-        // echo __LINE__;
-        // exit;
-       
+        print_r($shipp_data);
+        echo __LINE__;
+        exit;
+
         $this->form_validation->set_rules('shipping_name', 'Shipping Name', 'trim|required');
         // |is_unique[tbl_shipping.shipping_email]
         $this->form_validation->set_rules('shipping_email', 'Shipping Email', 'trim|required|valid_email');
@@ -135,27 +136,27 @@ class Home extends CI_Controller
 
         $this->form_validation->set_rules('payment', 'Payment', 'trim|required');
         $shipid = $this->session->userdata('shipping_id');
-        
+
         $order_total = $this->hmodel->get_coupon_disc($shipid);
         // print_r($order_total);
         // exit;
         // __LINE__;
-       
+
         if ($this->form_validation->run() == true) {
             $payment_id           = $this->hmodel->save_payment_info($data);
             $odata                = array();
             foreach ($order_total as $odtotal) {
-            $odata['customer_id'] = $this->session->userdata('user_id');
-            $odata['shipping_id'] = $this->session->userdata('shipping_id');
-            $odata['payment_id']  = $payment_id;
-            $odata['order_total'] = $odtotal->order_total;
-            $odata['disc_amount'] = $odtotal->disc_amount;
-            $odata['dis_type']    = $odtotal->dis_type;
-            $odata['grand_tot']   = $odtotal->grand_tot;
-            // print_r($odata);
-            // exit;
-            // __LINE__;
-            $order_id = $this->hmodel->save_order_info($odata);
+                $odata['customer_id'] = $this->session->userdata('user_id');
+                $odata['shipping_id'] = $this->session->userdata('shipping_id');
+                $odata['payment_id']  = $payment_id;
+                $odata['order_total'] = $odtotal->order_total;
+                $odata['disc_amount'] = $odtotal->disc_amount;
+                $odata['dis_type']    = $odtotal->dis_type;
+                $odata['grand_tot']   = $odtotal->grand_tot;
+                // print_r($odata);
+                // exit;
+                // __LINE__;
+                $order_id = $this->hmodel->save_order_info($odata);
             }
             $oddata = array();
 
@@ -239,7 +240,7 @@ class Home extends CI_Controller
         // $data = array();
         $data = $this->hmodel->order_details($id);
         // echo "<pre>";
-        // print_r($data['order_details']);
+        // print_r($data);
         // echo "</pre>";
         // exit;
         // $this->load->view('inc/primary_header');
@@ -249,13 +250,37 @@ class Home extends CI_Controller
     }
     public function discount_zone()
     {
-        
-        $discount = $this->input->post('coupon_code');
-        $subTotal = $this->input->post('sub_total');
-        $data = $this->flate_coupon_model->get_coupon_discount($discount);
 
-        echo json_encode($data);
+        $data = array();
+        $data1 = array();
+        $discount = $this->input->post('coupon_code');
+
+        $data = $this->gift_coupon_model->get_coupon_gift($discount);
+        $data1 = $this->disc_coupon_model->get_coupon_discount($discount);
+        if ($data) {
+            echo json_encode($data);
+        } else {
+            echo json_encode($data1);
+        }
     }
+    public function update_gift_data()
+    {
+        $disc['id'] = $this->input->post('coupon_id');
+        $disc['amount_left'] = $this->input->post('coupon_amt');
+        // print_r($disc);
+        // exit();
+        $updated_disc = $this->gift_coupon_model->update_gift_coupon($disc);
+        echo json_encode($updated_disc);
+    }
+    public function update_disc_data()
+    {
+        $disc = $this->input->post('coupon_id');
+        // print_r($disc);
+        // exit();
+        $result = $this->disc_coupon_model->update_disc_coupon($disc);
+        echo json_encode($result);
+    }
+
     public function ord_details()
     {
         $data['cart_contents'] = $this->cart->contents();
@@ -263,28 +288,28 @@ class Home extends CI_Controller
         $this->load->view('inc/secondary_header');
         $this->load->view('page/product_det_coupon', $data);
     }
-    public function check_coupon()
-    {
-        $data = array();
-        $code = $this->input->post('coupon');
-        $data['rowid'] = $this->input->post('rowid');
-        $result = $this->flate_coupon_model->get_coupon_discount($code);
-        // $total=$this->cart->total();
-        $coupon=$result->disc_amount;
-        print_r($coupon);
-        exit;
-        // if ($result) {
-        //     if ($result->disc_type == 'amount') {
-                
+    // public function check_coupon()
+    // {
+    //     $data = array();
+    //     $code = $this->input->post('coupon');
+    //     $data['rowid'] = $this->input->post('rowid');
+    //     $result = $this->gift_coupon_model->get_coupon_discount($code);
+    // $total=$this->cart->total();
+    // $coupon = $result->disc_amount;
+    // print_r($coupon);
+    // exit;
+    // if ($result) {
+    //     if ($result->disc_type == 'amount') {
 
-        //     } 
-        //     else if ($result->disc_type == 'percent') {
-        //     }
-        // } else {
-        //     return false;
-        // }
 
-        $this->cart->update($data);
-        redirect('home/cart');
-    }
+    //     } 
+    //     else if ($result->disc_type == 'percent') {
+    //     }
+    // } else {
+    //     return false;
+    // }
+
+    // $this->cart->update($data);
+    // redirect('home/cart');
+    // }
 }

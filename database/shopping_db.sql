@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 10, 2021 at 07:09 AM
+-- Generation Time: Dec 14, 2021 at 09:45 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -1391,38 +1391,6 @@ INSERT INTO `tbl_category` (`id`, `category_name`, `category_description`, `publ
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_coupon`
---
-
-DROP TABLE IF EXISTS `tbl_coupon`;
-CREATE TABLE IF NOT EXISTS `tbl_coupon` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(20) NOT NULL,
-  `dis_name` varchar(55) NOT NULL,
-  `disc_type` varchar(255) NOT NULL,
-  `disc_amount` int(50) NOT NULL,
-  `discount_category` varchar(55) NOT NULL,
-  `no_of_uses` int(10) NOT NULL,
-  `uses_left` int(10) NOT NULL,
-  `dis_start_date` date NOT NULL,
-  `dis_end_date` date NOT NULL,
-  `action` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_coupon`
---
-
-INSERT INTO `tbl_coupon` (`id`, `code`, `dis_name`, `disc_type`, `disc_amount`, `discount_category`, `no_of_uses`, `uses_left`, `dis_start_date`, `dis_end_date`, `action`) VALUES
-(11, 'FLAT50%', '$50 OFF', 'percent', 50, 'Customer Service Discount', 2, 0, '2021-12-08', '2021-12-15', ''),
-(12, 'FLAT25%', '$25 OFF', 'percent', 25, 'Rewards Point Discount', 2, 0, '2021-12-07', '2021-12-14', ''),
-(13, '$200OFF', 'Off200', 'amount', 200, 'Customer Service Discount', 2, 0, '2021-12-09', '2021-12-17', ''),
-(14, '$50OFF', 'OFF50', 'amount', 50, 'Referral Code Discount', 2, 0, '2021-12-09', '2021-12-30', '');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_customer`
 --
 
@@ -1467,7 +1435,7 @@ CREATE TABLE IF NOT EXISTS `tbl_discount_cal` (
   `grand_tot` float NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_discount_cal`
@@ -1478,7 +1446,68 @@ INSERT INTO `tbl_discount_cal` (`id`, `customer_id`, `order_total`, `disc_amount
 (41, 37, 405, 200, 'amount', 205, '2021-12-09 21:54:55'),
 (42, 37, 160, 50, 'percent', 80, '2021-12-09 22:14:45'),
 (43, 37, 0, 0, '', 0, '2021-12-09 23:25:32'),
-(44, 37, 30, 25, 'percent', 22.5, '2021-12-09 23:33:51');
+(44, 37, 30, 25, 'percent', 22.5, '2021-12-09 23:33:51'),
+(45, 37, 0, 0, '', 0, '2021-12-10 08:31:37'),
+(46, 37, 1400, 200, 'amount', 1200, '2021-12-10 08:36:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_disc_coupon`
+--
+
+DROP TABLE IF EXISTS `tbl_disc_coupon`;
+CREATE TABLE IF NOT EXISTS `tbl_disc_coupon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) NOT NULL,
+  `disc_name` varchar(55) NOT NULL,
+  `disc_amount` int(50) NOT NULL,
+  `disc_type` varchar(55) NOT NULL DEFAULT 'percent',
+  `no_of_uses` int(11) NOT NULL,
+  `discount_category` varchar(55) NOT NULL,
+  `no_of_used` int(10) NOT NULL DEFAULT '0',
+  `disc_start_date` date NOT NULL,
+  `disc_end_date` date NOT NULL,
+  `action` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_disc_coupon`
+--
+
+INSERT INTO `tbl_disc_coupon` (`id`, `code`, `disc_name`, `disc_amount`, `disc_type`, `no_of_uses`, `discount_category`, `no_of_used`, `disc_start_date`, `disc_end_date`, `action`) VALUES
+(17, 'FLAT35%OFF', 'Percent', 25, 'percent', 3, 'Rewards Point Discount', 0, '2021-12-13', '2021-12-27', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_gift_coupon`
+--
+
+DROP TABLE IF EXISTS `tbl_gift_coupon`;
+CREATE TABLE IF NOT EXISTS `tbl_gift_coupon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `disc_name` varchar(100) NOT NULL,
+  `disc_amount` float NOT NULL,
+  `disc_type` varchar(55) NOT NULL DEFAULT 'amount',
+  `disc_amount_left` float NOT NULL,
+  `discount_category` varchar(55) NOT NULL,
+  `no_of_uses` int(10) NOT NULL DEFAULT '0',
+  `dis_start_date` date NOT NULL,
+  `dis_end_date` date NOT NULL,
+  `action` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_gift_coupon`
+--
+
+INSERT INTO `tbl_gift_coupon` (`id`, `code`, `disc_name`, `disc_amount`, `disc_type`, `disc_amount_left`, `discount_category`, `no_of_uses`, `dis_start_date`, `dis_end_date`, `action`) VALUES
+(18, '$320OFF', 'Discount', 340, 'amount', 340, 'Referral Code Discount', 0, '2021-12-13', '2021-12-28', ''),
+(17, '$600OFF', 'Discount', 600, 'amount', 600, 'Rewards Point Discount', 0, '2021-12-13', '2021-12-20', '');
 
 -- --------------------------------------------------------
 
@@ -1499,7 +1528,7 @@ CREATE TABLE IF NOT EXISTS `tbl_order` (
   `action` varchar(20) NOT NULL DEFAULT 'pending',
   `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_order`
@@ -1508,10 +1537,14 @@ CREATE TABLE IF NOT EXISTS `tbl_order` (
 INSERT INTO `tbl_order` (`order_id`, `customer_id`, `shipping_id`, `payment_id`, `order_total`, `disc_amount`, `dis_type`, `grand_tot`, `action`, `order_date`) VALUES
 (40, 37, 47, 54, 202, 50, 'percent', 101, 'pending', '2021-12-09 21:49:36'),
 (41, 37, 48, 55, 405, 200, 'amount', 205, 'pending', '2021-12-09 21:54:59'),
-(42, 37, 49, 56, 160, 50, 'percent', 80, 'pending', '2021-12-09 22:14:49'),
 (43, 37, 49, 57, 160, 50, 'percent', 80, 'pending', '2021-12-09 22:16:34'),
-(44, 37, 50, 58, 0, 0, '', 0, 'pending', '2021-12-09 23:25:35'),
-(45, 37, 51, 59, 30, 25, 'percent', 22.5, 'pending', '2021-12-09 23:33:53');
+(45, 37, 51, 59, 30, 25, 'percent', 22.5, 'pending', '2021-12-09 23:33:53'),
+(47, 37, 53, 61, 1400, 200, 'amount', 1200, 'pending', '2021-12-10 08:36:55'),
+(51, 37, 57, 65, 30, 25, 'percent', 22.5, 'pending', '2021-12-10 12:27:27'),
+(52, 37, 58, 66, 502, 0, '', 502, 'pending', '2021-12-10 14:25:10'),
+(53, 37, 59, 67, 615, 0, '', 615, 'pending', '2021-12-10 14:26:29'),
+(54, 37, 60, 68, 30, 25, 'percent', 22.5, 'pending', '2021-12-10 14:44:42'),
+(55, 37, 61, 69, 168, 25, 'percent', 126, 'pending', '2021-12-11 13:42:38');
 
 -- --------------------------------------------------------
 
@@ -1531,7 +1564,7 @@ CREATE TABLE IF NOT EXISTS `tbl_order_details` (
   `product_image` varchar(55) DEFAULT NULL,
   `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`order_details_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_order_details`
@@ -1540,9 +1573,14 @@ CREATE TABLE IF NOT EXISTS `tbl_order_details` (
 INSERT INTO `tbl_order_details` (`order_details_id`, `customer_id`, `order_id`, `product_id`, `product_name`, `product_price`, `product_sales_quantity`, `product_image`, `order_date`) VALUES
 (40, 37, 40, 7, 'Mountain Rain Jacket', 101, 2, 'Five_Ten.jpg', '2021-12-09 21:49:36'),
 (41, 37, 41, 15, 'Samsung Galaxy Z Flip3 5G', 405, 1, 'Samsung_Galaxy.jpg', '2021-12-09 21:54:59'),
-(42, 37, 43, 14, 'Jabra Elite 75t Bluetooth ', 160, 1, 'JabraElite-75t.jpg', '2021-12-09 22:16:34'),
 (43, 37, 44, 2, 'Face Covers 3-Pack', 15, 1, 'feature-pic22.jpg', '2021-12-09 23:25:35'),
-(44, 37, 45, 2, 'Face Covers 3-Pack', 15, 2, 'feature-pic22.jpg', '2021-12-09 23:33:53');
+(45, 37, 46, 6, 'Samsung Galaxy S21 Ultra', 505, 1, 'sm21u.jpg', '2021-12-10 08:31:40'),
+(47, 37, 48, 17, 'Nike Mens Jacket CT2255', 140, 2, 'nik1.jpg', '2021-12-10 12:14:34'),
+(51, 37, 52, 4, 'AUE60 Crystal 4K UHD', 195, 2, 'pic3.jpg', '2021-12-10 14:25:10'),
+(52, 37, 52, 3, 'Slim Fit Linen Blazer', 56, 2, 'feature-pic33.jpg', '2021-12-10 14:25:10'),
+(53, 37, 53, 1, 'Ultraboost DNA Black Python Shoes', 205, 3, 'feature-pic11.jpg', '2021-12-10 14:26:29'),
+(54, 37, 54, 2, 'Face Covers 3-Pack', 15, 2, 'feature-pic22.jpg', '2021-12-10 14:44:42'),
+(55, 37, 55, 3, 'Slim Fit Linen Blazer', 56, 3, 'feature-pic33.jpg', '2021-12-11 13:42:38');
 
 -- --------------------------------------------------------
 
@@ -1556,7 +1594,7 @@ CREATE TABLE IF NOT EXISTS `tbl_payment` (
   `payment_type` varchar(50) NOT NULL,
   `actions` varchar(50) NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`payment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_payment`
@@ -1575,7 +1613,17 @@ INSERT INTO `tbl_payment` (`payment_id`, `payment_type`, `actions`) VALUES
 (56, 'net_banking', 'pending'),
 (57, 'net_banking', 'pending'),
 (58, 'cashon', 'pending'),
-(59, 'cashon', 'pending');
+(59, 'cashon', 'pending'),
+(60, 'cashon', 'pending'),
+(61, 'net_banking', 'pending'),
+(62, 'cashon', 'pending'),
+(63, 'cashon', 'pending'),
+(64, 'cashon', 'pending'),
+(65, 'cashon', 'pending'),
+(66, 'cashon', 'pending'),
+(67, 'cashon', 'pending'),
+(68, 'cashon', 'pending'),
+(69, 'cashon', 'pending');
 
 -- --------------------------------------------------------
 
@@ -1610,7 +1658,7 @@ INSERT INTO `tbl_product` (`product_id`, `product_title`, `product_short_descrip
 (1, 'Ultraboost DNA Black Python Shoes', 'Responsive shoes snakeskin acc.', 'Black pythons are sleek, cool and a little bit dangerous. Channel the exotic beauty of the Australian snake and make it yours in these adidas Ultraboost DNA Black Python Shoes. The stretchy knit upper features snakeskin-inspired details. Energy-returning cushioning keeps you comfortable when you\'re on the move.', 'feature-pic11.jpg', 205, 50, 1, 6, 5, 1, 0, '2017-11-30 14:24:41', 1),
 (2, 'Face Covers 3-Pack', 'Two 3-packs for $30 with code MASKUP. Size M/L is recommended for most adults. This product is not eligible for returns or exchanges.', 'Made with soft, breathable fabric the adidas Face Cover is comfortable, washable and reusable for practicing healthy habits every day. This cover is not a medically-graded mask nor personal protective equipment.', 'feature-pic22.jpg', 15, 50, 1, 5, 5, 1, 0, '2017-11-30 14:29:04', 1),
 (3, 'Slim Fit Linen Blazer', 'Single-breasted blazer in woven linen fabric. Narrow, notched lapels with decorative buttonhole. Chest pocket, front pockets with flap, and two inner pockets.', 'Single-breasted blazer in woven linen fabric. Narrow, notched lapels with decorative buttonhole. Chest pocket, front pockets with flap, and two inner pockets. Two buttons at front, decorative buttons at cuffs, and vent at back. Lined. Slim Fit – tapered at chest and waist with slightly narrower sleeves for a tailored silhouette.\n\n', 'feature-pic33.jpg', 56, 35, 1, 5, 4, 1, 0, '2017-11-30 14:38:25', 1),
-(4, 'AUE60 Crystal 4K UHD', '4K UHD TV goes beyond regular FHD with 4x more pixels, offering your eyes the sharp and crisp images they deserve. Now you can see even the small details in the scene.', 'A sleek and elegant design that draws you to the purest picture. Crafted with an effortless minimalistic style from every angle and a boundless design that sets new standards. Keep your cables tidy and conceal them, reducing clutter and keeping a seamless look for your TV. Choose your favorite voice assistant; Bixby, Amazon Alexa or Google Assistant. For the first time, all are built into your Samsung TV to provide the optimal entertainment experience and advanced control in your connected home.\n\n', 'pic3.jpg', 195, 150, 1, 4, 2, 1, 0, '2017-11-30 14:38:57', 1),
+(4, 'AUE60 Crystal 4K UHD', '4K UHD TV goes beyond regular FHD with 4x more pixels, offering your eyes the sharp and crisp images they deserve. Now you can see even the small details in the scene.', 'A sleek and elegant design that draws you to the purest picture. Crafted with an effortless minimalistic style from every angle and a boundless design that sets new standards. Keep your cables tidy and conceal them, reducing clutter and keeping a seamless look for your TV. Choose your favorite voice assistant; Bixby, Amazon Alexa or Google Assistant. For the first time, all are built into your Samsung TV to provide the optimal entertainment experience and advanced control in your connected home.\n\n', 'pic3.jpg', 1000, 150, 1, 4, 2, 1, 0, '2017-11-30 14:38:57', 1),
 (5, 'Razer 15.6', 'Designed for gaming, the Razer 15.6\" Blade 15 Gaming Laptop combines mobility with performance. Graphics are handled by the dedicated NVIDIA GeForce GTX 1660 Ti graphics card with VRAM.     ', 'Designed for gaming, the Razer 15.6\" Blade 15 Gaming Laptop combines mobility with performance. Graphics are handled by the dedicated NVIDIA GeForce GTX 1660 Ti graphics card with VRAM. It also features a 10th Gen 2.6 GHz Intel Core i7-10750H six-core processor and 16GB of 2933 MHz of DDR4 RAM. Its 256GB NVME PCIe M.2 SSD allows for fast boot times. For online multiplayer features, the Razer Blade 15 can utilize Wi-Fi 6 (802.11ax) or a wired Gigabit Ethernet connection. It also supports wireless accessories via Bluetooth 5.1 technology. The Razer Blade 15 features a precision-crafted aluminum chassis.\n\nThe 15.6\" display features a FHD 1920 x 1080 resolution and are individually factory calibrated, providing 100% of the sRGB color space. The bezels are thin, measuring in at about 4.9mm. The screen also has a matte finish to reduce glare in brightly-lit environments. The keyboard is backlit and supports Razer Chroma single-zone RGB lighting. Other features included Thunderbolt 3, USB Type-C, USB Type-A, and a 3.5mm audio jack. Windows 10 Home is the installed operating system.', 'preview-img.jpg', 700, 56, 1, 1, 6, 1, 0, '2017-11-30 14:40:34', 1),
 (6, 'Samsung Galaxy S21 Ultra', 'The highest resolution photos and video on a smartphone', 'Samsung Electronics Co., Ltd. unveiled the Galaxy S21 Ultra, a flagship that pushes the boundaries of what a smartphone can do. The S21 Ultra pulls out all the stops for those who want Samsung’s best-of-the-best with our most advanced pro-grade camera system and our brightest, most intelligent display. It takes productivity and creativity up a notch by bringing the popular S Pen experience to the Galaxy S series for the first time.</span>', 'sm21u.jpg', 505, 12, 1, 3, 2, 1, 0, '2021-05-12 09:20:39', 1),
 (7, 'Mountain Rain Jacket', 'A Lightweight Rain Jacket for Wet Weather Rides.', '<span style=\"font-family: AdihausDIN, Helvetica, Arial, sans-serif; font-size: 16px; white-space: pre-line; background-color: rgb(255, 255, 255);\">Expand your wet weather options.&nbsp;</span><span style=\"font-family: AdihausDIN, Helvetica, Arial, sans-serif; font-size: 16px; white-space: pre-line; background-color: rgb(255, 255, 255);\">The adidas Five Ten All-Mountain Rain Jacket keeps you dry and on the bike through cool misty days and afternoon showers.&nbsp;</span><span style=\"font-family: AdihausDIN, Helvetica, Arial, sans-serif; font-size: 16px; white-space: pre-line; background-color: rgb(255, 255, 255);\">RAIN.RDY keeps out wind and rain, while elastic cuffs, hem and hood further seal out the elements while you ride.&nbsp;</span><span style=\"font-family: AdihausDIN, Helvetica, Arial, sans-serif; font-size: 16px; white-space: pre-line; background-color: rgb(255, 255, 255);\">Its lightweight build makes for easy packing. Zip out the showers and keep on riding.</span>', 'Five_Ten.jpg', 101, 26, 1, 5, 5, 1, 0, '2021-05-12 16:00:39', 1),
@@ -1663,7 +1711,7 @@ CREATE TABLE IF NOT EXISTS `tbl_shipping` (
   `dis_type` varchar(50) NOT NULL,
   `grand_tot` float NOT NULL,
   PRIMARY KEY (`shipping_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_shipping`
@@ -1673,8 +1721,13 @@ INSERT INTO `tbl_shipping` (`shipping_id`, `customer_id`, `shipping_name`, `ship
 (47, 37, 'Rajkumar Banothe', 'rajbanothe@gmail.com', 'Gondia', 'Gondia', 'India', '9898656532', '440001', 202, 50, 'percent', 101),
 (48, 37, 'Navin Yele', 'navinyele@gmail.com', 'Nagpur', 'Nagpur', 'India', '4545457887', '440001', 405, 200, 'amount', 205),
 (49, 37, 'Rajkumar Banothe', 'rajbanothe@gmail.com', 'Gondia', 'Gondia', 'India', '9898656532', '440001', 160, 50, 'percent', 80),
-(50, 37, 'Rajkumar Banothe', 'rajbanothe@gmail.com', 'Nagpur', 'Gondia', 'India', '9898656532', '440001', 0, 0, '', 0),
-(51, 37, 'Navin Yele', 'navinyele@gmail.com', 'Nagpur', 'Nagpur', 'India', '4545457887', '440551', 30, 25, 'percent', 22.5);
+(51, 37, 'Navin Yele', 'navinyele@gmail.com', 'Nagpur', 'Nagpur', 'India', '4545457887', '440551', 30, 25, 'percent', 22.5),
+(53, 37, 'Rajkumar Banothe', 'rajbanothe04@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 1400, 200, 'amount', 1200),
+(57, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 30, 25, 'percent', 22.5),
+(58, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 502, 0, '', 502),
+(59, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 615, 0, '', 615),
+(60, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 30, 25, 'percent', 22.5),
+(61, 37, 'Navin Yele', 'navinyele@gmail.com', 'Seoni', 'Seoni', 'India', '8855447722', '440028', 168, 25, 'percent', 126);
 
 -- --------------------------------------------------------
 
