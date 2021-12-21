@@ -26,6 +26,10 @@
 			</ul>
 			<?php
 			if ($this->session->userdata('user_id')) { ?>
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="<?php echo base_url('service_public'); ?>">Order Service</a></li>
+			</ul>
+
 			<ul class="nav navbar-nav navbar-right">
 
 				<li><a class="navbar-brand" href="<?php echo base_url('login/logout'); ?>">Logout</a></li>

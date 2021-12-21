@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 15, 2021 at 10:17 AM
+-- Generation Time: Dec 17, 2021 at 12:51 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `shopping_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute`
+--
+
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE IF NOT EXISTS `attribute` (
+  `att_id` int(11) NOT NULL AUTO_INCREMENT,
+  `att_name` varchar(100) NOT NULL,
+  `att_type` varchar(50) NOT NULL,
+  `att_values` varchar(255) DEFAULT NULL,
+  `att_fieldsize` varchar(50) DEFAULT NULL,
+  `att_custprice` varchar(50) DEFAULT NULL,
+  `mandatory` tinyint(1) DEFAULT '0' COMMENT '1=yes\r\n0=no',
+  PRIMARY KEY (`att_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attribute`
+--
+
+INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fieldsize`, `att_custprice`, `mandatory`) VALUES
+(16, 'Would you like Photographer Editor', 'Checkbox Type', 'Yes,No', '', '', 1),
+(15, 'Choose Editing Type', 'Radio Type', 'Black & White, color', '', '', 1),
+(14, 'Customize Service', 'Rate Change', 'Please Select,1,2,3,4,5,6,7,8,9,10', '', '', 0),
+(13, 'Additional Information', 'Free Text', '', '2', '', 1),
+(11, 'Type of Shoot', 'Predefined Values', 'Please Select,Wedding/Event,Portrait,Commercial,Stock,Real Estate', '', '', 1),
+(12, 'Order Name', 'Single Line Free Text', '', '', '', 1),
+(17, 'White Balance', 'Predefined Values', 'Neural,Cool,Warm', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1294,6 +1325,34 @@ INSERT INTO `country` (`id`, `countryname`) VALUES
 (1, 'India'),
 (2, 'USA'),
 (3, 'South Africa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service`
+--
+
+DROP TABLE IF EXISTS `service`;
+CREATE TABLE IF NOT EXISTS `service` (
+  `ser_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ser_name` varchar(50) NOT NULL,
+  `ser_description` varchar(100) NOT NULL,
+  `ser_ternaround` int(11) NOT NULL,
+  `ser_type` varchar(20) NOT NULL,
+  `ser_cust_price` float NOT NULL,
+  `ser_qty` int(11) NOT NULL,
+  `ser_activation` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`ser_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `service`
+--
+
+INSERT INTO `service` (`ser_id`, `ser_name`, `ser_description`, `ser_ternaround`, `ser_type`, `ser_cust_price`, `ser_qty`, `ser_activation`) VALUES
+(1, 'Photoshop', 'photo', 1, 'standard', 1, 1, NULL),
+(2, 'Photoshop1', 'pic', 2, 'standard', 1, 2, 0),
+(3, 'THE PHOTOGRAPHER\'S EDIT APPROCH', 'At Photographer\'s Edit, our focus is on simple, customizable, and high-quality post-processing servi', 5, 'standard', 0, 1, 0);
 
 -- --------------------------------------------------------
 

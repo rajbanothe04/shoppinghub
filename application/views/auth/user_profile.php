@@ -61,8 +61,8 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><b>Password :-</b></td>
-						<td>********</td>
+						<td><b>Address :-</b></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td></td>

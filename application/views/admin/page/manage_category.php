@@ -48,10 +48,10 @@
 					</thead>
 					<tbody>
 						<?php
-                        $i = 0;
-                        foreach ($all_categroy as $single_category) {
-                            $i++;
-                        ?>
+						$i = 0;
+						foreach ($all_categroy as $single_category) {
+							$i++;
+						?>
 						<tr>
 							<td><?php echo $i; ?></td>
 							<td><?php echo $single_category->category_name ?></td>
@@ -60,10 +60,10 @@
 								<?php if ($single_category->publication_status == 1) { ?>
 								<span class="label label-success">Published</span>
 								<?php } else {
-                                    ?>
+									?>
 								<span class="label label-danger" style="background:red">Unpublished</span>
 								<?php }
-                                    ?>
+									?>
 							</td>
 							<td class="center">
 								<?php if ($single_category->publication_status == 0) { ?>
@@ -72,13 +72,13 @@
 									<i class="halflings-icon white thumbs-up"></i>
 								</a>
 								<?php } else {
-                                    ?>
+									?>
 								<a class="btn btn-danger"
 									href="<?php echo base_url('category/unpublished_category/' . $single_category->id); ?>">
 									<i class="halflings-icon white thumbs-down"></i>
 								</a>
 								<?php }
-                                    ?>
+									?>
 
 								<a class="btn btn-info"
 									href="<?php echo base_url('category/edit_category/' . $single_category->id); ?>">

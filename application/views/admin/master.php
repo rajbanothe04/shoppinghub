@@ -104,9 +104,20 @@
 							</ul>
 						</li>
 
-
-						<li><a href="#"><i class="icon-cog"></i><span class="hidden-tablet"> Setting</span></a>
+						<li>
+							<a class="dropmenu" href="#"><i class="icon-cog"></i><span class="hidden-tablet">
+									Setting<i class="icon-angle-down"></i></span></a>
+							<ul>
+								<li><a class="submenu" href="<?php echo base_url('service'); ?>">
+										<i class="icon-file-alt"></i><span class="hidden-tablet">Services</span></a>
+								</li>
+								<li><a class="submenu" href="<?php echo base_url('service/manage_attribute'); ?>">
+										<i class="icon-file-alt"></i><span class="hidden-tablet">Attributes</span></a>
+								</li>
+							</ul>
 						</li>
+
+						<!-- <li><a href="#"><i class="icon-cog"></i><span class="hidden-tablet"> </span></a></li> -->
 					</ul>
 				</div>
 			</div>
