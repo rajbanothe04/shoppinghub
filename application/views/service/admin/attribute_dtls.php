@@ -68,12 +68,6 @@
 										echo '<textarea id="free_txt" name="free_txt" rows="' . $attribute->att_fieldsize . '" cols=""></textarea>';
 									} elseif ($attribute_type == "rate_change") {
 										echo	'<input type="text" name="rate_change" id="rate_change">';
-									} elseif ($attribute_type == "Rate Change") {
-										echo '<select name="rate_change" id="rate_change" class="form-control" required>';
-										foreach ($arr as $key => $value) {
-											echo '<option value="' . $key . '" >' . $value . '</option>';
-										}
-										echo '</select>';
 									} elseif ($attribute_type == "custom_price") {
 										echo '<input type="text" name="custom_price" id="custom_price">';
 									} elseif ($attribute_type == "single_line_free_text") {
@@ -84,20 +78,19 @@
 											echo $value . '<input type="radio" id="radio_type" name="radio_type" value="' . $key . '">';
 										}
 									} elseif ($attribute_type == "checkbox_type") {
-										foreach ($arr as $key => $value) {
-											echo '
-											<input type="checkbox">' . $value;
-										}
+
+										echo '<input type="text" name="checkbox_type" id="checkbox_type">';
 									}
 
 									?>
 							</td>
 							<td class="center" style="text-align: center">
 								<a class="btn btn-info"
-									href="<?php echo base_url('service/edit_attribute/' . $attribute->att_id) ?>">
+									href="<?php echo base_url('service/edit_attribute/' . $attribute->att_id); ?>">
 									<i class="halflings-icon white edit"></i>
 								</a>
-								<a class="btn btn-danger" href="#">
+								<a class="btn btn-danger"
+									href="<?php echo base_url('service/delete_attribute/' . $attribute->att_id); ?>">
 									<i class="halflings-icon white trash"></i>
 								</a>
 							</td>

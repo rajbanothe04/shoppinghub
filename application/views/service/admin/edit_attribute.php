@@ -44,28 +44,40 @@
 				<!-- <div class="box"> -->
 				<div class="box-header">Attribute Details:</div>
 				<br>
-				<form action="<?php echo base_url('service/save_attribute'); ?>" method="post"
-					style="padding-left: 10px;">
+				<form action="<?php echo base_url('service/update_attribute/' . $get_attribute_data->att_id); ?>"
+					method="post" style="padding-left: 10px;">
 
 					<div class="form-group">
 						<label for="att_name">Attribute Name: </label>
 						<input type="text" name="att_name" class="form-control"
-							value="<?php echo $get_attribute_data->att_name ?>" placeholder="Enter attribute name"
-							required />
-
+							value="<?php echo $get_attribute_data->att_name; ?>" />
 						<div class="form-group">
 							<label for="att_type">Attribute Type: </label>
 							<!-- onchange="setAttributeValueField();" -->
 							<select name="att_type" id="att_type" class="form-control">
-								<option value="<?php echo $get_attribute_data->att_type; ?>">
-									<?php echo $get_attribute_data->att_type; ?></option>
-								<option value="predefined_values">Predefined Values</option>
-								<option value="free_text">Free Text</option>
-								<option value="rate_change">Rate Change</option>
-								<option value="custom_price">Custom Price</option>
-								<option value="single_line_free_text">Single Line Free Text</option>
-								<option value="radio_type">Radio Type</option>
-								<option value="checkbox_type">Checkbox Type</option>
+
+								<option <?php if ($get_attribute_data->att_type == "predefined_values") { ?>
+									selected="selected" <?php } ?> value="predefined_values">Predefined Values</option>
+
+								<option <?php if ($get_attribute_data->att_type == "free_text") { ?> selected="selected"
+									<?php } ?> value="free_text">Free Text</option>
+								<option <?php if ($get_attribute_data->att_type == "rate_change") { ?>
+									selected="selected" <?php } ?> value="rate_change">Rate Change</option>
+
+								<option <?php if ($get_attribute_data->att_type == "custom_price") { ?>
+									selected="selected" <?php } ?> value="custom_price">Custom Price</option>
+
+								<option <?php if ($get_attribute_data->att_type == "single_line_free_text") { ?>
+									selected="selected" <?php } ?> value="single_line_free_text">Single Line Free Text
+								</option>
+
+								<option <?php if ($get_attribute_data->att_type == "radio_type") { ?>
+									selected="selected" <?php } ?> value="radio_type">Radio Type</option>
+
+								<option <?php if ($get_attribute_data->att_type == "checkbox_type") { ?>
+									selected="selected" <?php } ?> value="checkbox_type">Checkbox Type</option>
+								<!-- <option <?php echo ($get_attribute_data->att_type == "radio_type") ? "selected" : "" ?>>
+									Radio Type</option> -->
 							</select>
 						</div>
 
@@ -105,7 +117,6 @@
 <script>
 $(document).ready(function() {
 	// alert("Test");
-
 	if ($('#att_type').val() == "predefined_values") {
 		$('#attribute_values').show();
 		$('#attribute_cust_price').hide();

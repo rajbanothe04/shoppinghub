@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 15, 2021 at 10:17 AM
+-- Generation Time: Dec 21, 2021 at 03:57 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -20,6 +20,48 @@ SET time_zone = "+00:00";
 --
 -- Database: `shopping_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute`
+--
+
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE IF NOT EXISTS `attribute` (
+  `att_id` int(11) NOT NULL AUTO_INCREMENT,
+  `att_name` varchar(100) NOT NULL,
+  `att_type` varchar(50) NOT NULL,
+  `att_values` varchar(255) DEFAULT NULL,
+  `att_fieldsize` varchar(50) DEFAULT NULL,
+  `att_custprice` varchar(50) DEFAULT NULL,
+  `mandatory` varchar(3) DEFAULT 'No',
+  PRIMARY KEY (`att_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attribute`
+--
+
+INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fieldsize`, `att_custprice`, `mandatory`) VALUES
+(15, 'Choose Editing Type', 'radio_type', 'Black & White, color', '', '', 'Yes'),
+(14, 'Customize Service', 'rate_change', 'Please Select,1,2,3,4,5,6,7,8,9,10', '', '', 'No'),
+(29, 'Additional Information', 'free_text', '', '2', '', 'No'),
+(12, 'Type of Shoot', 'predefined_values', 'Please Select,Wedding/Event,Portrait,Commercial,Stock,Real Estate', '', '', 'Yes'),
+(11, 'Order Name', 'single_line_free_text', '', '', '', 'Yes'),
+(17, 'White Balance', 'predefined_values', 'Neural,Cool,Warm', '', '', 'Yes'),
+(18, 'Would you like Photographer Editor', 'radio_type', 'Yes,No', '', '', 'No'),
+(19, 'Number of Images to be Uploaded', 'predefined_values', '1,2,3,4,5,6,7,8,9,10', '', '', 'No'),
+(20, 'Include Color-correction?', 'predefined_values', 'No color correction, Color correct all the images to the following Editing style.', '', '', 'No'),
+(21, 'Number of images to be submitted', 'single_line_free_text', '', '', '', 'Yes'),
+(22, 'What editing style would you like applied to this order? ', 'predefined_values', 'PE Standard, PE FIlm,PE Dark & Moody, PE Light & Airy,PE Warm Creamy,Custom', '', '', 'Yes'),
+(23, 'Describe the work to be done, per image:', 'single_line_free_text', '', '', '', 'No'),
+(24, 'Return file format  ', 'predefined_values', 'Download Flattened JPGs,Download Layered PSDs', '', '', 'Yes'),
+(25, 'Gallery Upload Details ', 'single_line_free_text', '', '', '', 'No'),
+(26, 'Pre-approved amount (Optional)', 'single_line_free_text', '', '', '', 'No'),
+(27, 'Discount Details', 'predefined_values', '', '', '', 'No'),
+(28, 'Code', 'single_line_free_text', '', '', '', 'No'),
+(13, 'Choose Filter', 'checkbox_type', 'Blemish Removal,Skin Smoothing,Flyaway Hairs (across face, 2 people max),Braces Removal,Eyeglass Glare Removal,Skin Smoothing (body, including face),Background Swap (include support image for sky),Face/Head Swap (2 people max)', '', '', 'No');
 
 -- --------------------------------------------------------
 
@@ -1298,6 +1340,66 @@ INSERT INTO `country` (`id`, `countryname`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `service`
+--
+
+DROP TABLE IF EXISTS `service`;
+CREATE TABLE IF NOT EXISTS `service` (
+  `ser_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ser_name` varchar(50) NOT NULL,
+  `ser_description` varchar(100) NOT NULL,
+  `ser_ternaround` int(11) NOT NULL,
+  `ser_type` varchar(20) NOT NULL,
+  `ser_cust_price` float NOT NULL,
+  `ser_qty` int(11) NOT NULL,
+  `ser_activation` varchar(10) DEFAULT 'No',
+  PRIMARY KEY (`ser_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `service`
+--
+
+INSERT INTO `service` (`ser_id`, `ser_name`, `ser_description`, `ser_ternaround`, `ser_type`, `ser_cust_price`, `ser_qty`, `ser_activation`) VALUES
+(7, 'Photoshop Retouching', 'Photoshop Retouching', 2, 'standard', 2, 1, 'Yes'),
+(8, 'Custom Presets', 'Custom Presets', 1, 'standard', 1, 1, 'No'),
+(9, 'Retouching - A La Carte', 'Retouching - A La Carte', 2, 'standard', 2, 1, 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_attribute`
+--
+
+DROP TABLE IF EXISTS `service_attribute`;
+CREATE TABLE IF NOT EXISTS `service_attribute` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `service_attribute`
+--
+
+INSERT INTO `service_attribute` (`id`, `service_id`, `attribute_id`) VALUES
+(15, 7, 11),
+(16, 7, 12),
+(17, 7, 13),
+(18, 7, 15),
+(19, 7, 14),
+(20, 7, 17),
+(21, 7, 18),
+(27, 7, 29),
+(23, 9, 11),
+(24, 9, 13),
+(25, 9, 14),
+(26, 9, 17);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `state`
 --
 
@@ -1494,7 +1596,7 @@ CREATE TABLE IF NOT EXISTS `tbl_disc_coupon` (
 --
 
 INSERT INTO `tbl_disc_coupon` (`id`, `code`, `disc_name`, `disc_amount`, `disc_type`, `no_of_uses`, `discount_category`, `no_of_used`, `disc_start_date`, `disc_end_date`, `action`) VALUES
-(17, 'FLAT35%OFF', 'Percent', 25, 'percent', 3, 'Rewards Point Discount', 0, '2021-12-13', '2021-12-27', '');
+(17, 'FLAT35%OFF', 'Percent', 25, 'percent', 3, 'Rewards Point Discount', 0, '2021-12-13', '2022-01-08', '');
 
 -- --------------------------------------------------------
 
@@ -1523,8 +1625,8 @@ CREATE TABLE IF NOT EXISTS `tbl_gift_coupon` (
 --
 
 INSERT INTO `tbl_gift_coupon` (`id`, `code`, `disc_name`, `disc_amount`, `disc_type`, `disc_amount_left`, `discount_category`, `no_of_uses`, `dis_start_date`, `dis_end_date`, `action`) VALUES
-(18, '$320OFF', 'Discount', 340, 'amount', 340, 'Referral Code Discount', 0, '2021-12-13', '2021-12-28', ''),
-(17, '$600OFF', 'Discount', 600, 'amount', 600, 'Rewards Point Discount', 0, '2021-12-13', '2021-12-20', ''),
+(18, '$320OFF', 'Discount', 340, 'amount', 340, 'Referral Code Discount', 0, '2021-12-13', '2022-01-28', ''),
+(17, '$600OFF', 'Discount', 600, 'amount', 600, 'Rewards Point Discount', 0, '2021-12-13', '2022-01-01', ''),
 (20, '$100OFF', 'Discount', 100, 'amount', 100, 'High Volume Discount', 0, '2021-12-08', '2021-12-13', '');
 
 -- --------------------------------------------------------

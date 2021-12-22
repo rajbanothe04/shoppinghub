@@ -36,12 +36,7 @@
 						}
 						echo '</select><hr>';
 					} elseif ($attribute_type == "checkbox_type") {
-						echo '<label style="margin-top: -15px";>' . $attribute->att_name . ' :</label><br>';
-						foreach ($arr as $key => $value) {
-							echo '
-											<input type="checkbox" name="check[]" value="' . $value . '">&nbsp&nbsp' . $value . '<br>';
-						}
-						echo '<hr>';
+						echo '<input type="checkbox" name="checkbox_type" id="checkbox_type">&nbsp&nbsp<label> ' . $attribute->att_name . '</label><hr>';
 					} elseif ($attribute_type == "single_line_free_text") {
 						echo '<label style="margin-top: -15px";>' . $attribute->att_name . ' :</label><br>';
 						echo	'<input type="text" name="single_line" id="single_line" style="width: 100%" required><hr>';

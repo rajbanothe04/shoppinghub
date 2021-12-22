@@ -96,9 +96,14 @@
 
 							$arr = explode(",", $attribute->att_values);
 							?>
+
 						<label><input type="checkbox" name="selected_attribute[]" class="checkbox-primary"
 								value="<?php echo $attribute->att_id; ?>"><?php echo $attribute->att_name; ?>
 						</label>
+						<!-- <span><a
+								href="<?php echo base_url('service/edit_attribute/' . $attribute->att_id); ?>">Edit</a>
+						</span> -->
+
 						<?php if ($attribute_type == "predefined_values") {
 
 								echo
@@ -118,17 +123,15 @@
 								echo '</select>';
 							} elseif ($attribute_type == "custom_price") {
 								echo '<input type="text" name="custom_price" style="width:90%" id="custom_price">';
-							} elseif ($attribute_type == "single_line") {
-								echo '<input type="text" name="single_line" style="width:90%" id="single_line">';
+							} elseif ($attribute_type == "single_line_free_text") {
+								echo '<input type="text" name="single_line_free_text" style="width:90%" id="single_line_free_text">';
 							} elseif ($attribute_type == "radio_type") {
 								foreach ($arr as $key => $value) {
 
 									echo $value . '<input type="radio" id="radio_type" name="radio_type" value="' . $key . '">';
 								}
 							} elseif ($attribute_type == "checkbox_type") {
-								foreach ($arr as $key => $value) {
-									echo '<input type="checkbox">' . $value;
-								}
+								echo '<input type="text" name="checkbox_type" id="checkbox_type">';
 							}
 
 							?>
@@ -154,16 +157,17 @@
 <!--/.fluid-container-->
 
 <!-- end: Content -->
-<!-- <script>
-$(document).ready(function() {
-	// alert("Hello");
-	$(".btnSubmit").click(function() {
-		var selectedAttribute = new Array();
-		$('input[name="selected_attribute"]:checked').each(function() {
-			selectedAttribute.push(this.value);
-		});
-		alert("Number of selected Attributes: " + selectedAttribute.length + "\n" + "And, they are: " +
-			selectedAttribute);
-	});
-});
-</script> -->
+<script>
+// $(document).ready(function() {
+// 	// alert("Hello");
+// 	$(".btnSubmit").click(function() {
+// 		var selectedAttribute = new Array();
+// 		$('input[name="selected_attribute"]:checked').each(function() {
+// 			selectedAttribute.push(this.value);
+// 		});
+// 		alert("Number of selected Attributes: " + selectedAttribute.length + "\n" + "And, they are: " +
+// 			selectedAttribute);
+// 	});
+// });
+// 
+</script>

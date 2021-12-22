@@ -56,6 +56,7 @@
 							<label for="att_type">Attribute Type: </label>
 							<!-- onchange="setAttributeValueField();" -->
 							<select name="att_type" id="att_type" class="form-control" required>
+								<option value="">----Select Attribute Type----</option>
 								<option value="predefined_values">Predefined Values</option>
 								<option value="free_text">Free Text</option>
 								<option value="rate_change">Rate Change</option>
@@ -82,6 +83,10 @@
 							<input type="checkbox" id="mandatory" class="form-control" value="Yes"
 								name="mandatory">Mandatory: Yes
 						</div><br>
+						<div class="form-group">
+							<input type="checkbox" id="hide_price" class="form-control" value="Yes"
+								name="hide_price">Hide Price: Yes
+						</div><br>
 						<hr>
 						<div style="text-align: center"><input type="submit" name="submit" value="Save"
 								class="btn btn-primary">
@@ -97,7 +102,6 @@
 <script>
 $(document).ready(function() {
 	// alert("Test");
-	$('#attribute_values').show();
 	$('#att_type').on('change', function() {
 		// alert("Test");
 		if ($('#att_type').val() == "predefined_values") {

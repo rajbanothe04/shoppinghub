@@ -47,10 +47,12 @@
 						<tr>
 							<td class="center"><?php echo $service->ser_name ?></td>
 							<td class="center" style="text-align: center">
-								<a class="btn btn-info" href="#">
+								<a class="btn btn-info"
+									href="<?php echo base_url('service/edit_service/' . $service->ser_id); ?>">
 									<i class="halflings-icon white edit"></i>
 								</a>
-								<a class="btn btn-danger" href="#">
+								<a class="btn btn-danger"
+									href="<?php echo base_url('service/delete_service/' . $service->ser_id); ?>">
 									<i class="halflings-icon white trash"></i>
 								</a>
 							</td>
