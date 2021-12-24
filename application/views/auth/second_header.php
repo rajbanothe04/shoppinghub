@@ -24,11 +24,12 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="<?php echo base_url('home'); ?>">All Categories</a></li>
 			</ul>
-			<?php
-			if ($this->session->userdata('user_id')) { ?>
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="<?php echo base_url('service_public'); ?>">Order Service</a></li>
 			</ul>
+
+			<?php
+			if ($this->session->userdata('user_id')) { ?>
 
 			<ul class="nav navbar-nav navbar-right">
 
@@ -37,10 +38,18 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<?php echo base_url('home/my_order'); ?>">My Order</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Service Cart</a></li>
+			</ul>
 			<?php
 			} else { ?>
+
+
 			<ul class="nav navbar-nav navbar-right">
 				<li><a class="navbar-brand" href="<?php echo base_url('login'); ?>">Login</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?php echo base_url('login'); ?>">Service Cart</a></li>
 			</ul>
 			<?php } ?>
 		</div>

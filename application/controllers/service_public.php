@@ -13,8 +13,8 @@ class Service_Public extends CI_Controller
 		$service_data['service_content'] = $this->service_public_model->get_service_data();
 		// print_r($service_data);
 		// exit;
-		$this->load->view('inc/primary_header');
-		$this->load->view('inc/secondary_header');
+		$this->load->view('auth/first_header');
+		$this->load->view('auth/second_header');
 		$this->load->view('service/page/order', $service_data);
 	}
 	public function submit_service()
@@ -22,15 +22,18 @@ class Service_Public extends CI_Controller
 		$id = $this->input->post('service');
 		// print_r($id);
 		// exit;
-		$no_of_img = $this->input->post('no_of_image');
+		$data['no_of_image'] = $this->input->post('no_of_image');
 		$data['get_details'] = $this->service_public_model->get_service_attribute($id);
-		$this->load->view('inc/primary_header');
-		$this->load->view('inc/secondary_header');
-		$this->load->view('service/page/custome', $data, $no_of_img);
+		// print_r($data);
+		// exit;
+		$this->load->view('auth/first_header');
+		$this->load->view('auth/second_header');
+		$this->load->view('service/page/custome', $data);
 	}
 	public function submit_custom_order()
 	{
 		$data = $this->input->post();
 		print_r($data);
+		exit;
 	}
 }

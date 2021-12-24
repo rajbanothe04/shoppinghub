@@ -87,6 +87,8 @@
 					</div>
 				</div>
 
+				<!-- ----------------------------------Attribute Section--------------------------------------------- -->
+
 				<div class="col span6 box">
 					<div class="box-header">Attribute Details:</div>
 					<br>
@@ -95,6 +97,9 @@
 						<?php $attribute_type = $attribute->att_type;
 
 							$arr = explode(",", $attribute->att_values);
+							$arr1 = explode(",", $attribute->att_custprice);
+							// foreach ($arr2 as $key => $price) {
+							// }
 							?>
 
 						<label><input type="checkbox" name="selected_attribute[]" class="checkbox-primary"
@@ -116,9 +121,11 @@
 								echo '<textarea id="free_txt" name="free_txt" style="width:90%"
 							rows="' . $attribute->att_fieldsize . '" cols=""></textarea>';
 							} elseif ($attribute_type == "rate_change") {
-								echo '<select name="rate_change" id="rate_change" class="form-control" required>';
+								echo '<select name="rate_change" id="rate_change" class="form-control">';
 								foreach ($arr as $key => $value) {
-									echo '<option value="' . $key . '">' . $value . '</option>';
+
+									echo '<option value="' . $key . '">' . $value . ' ' . $arr1[$key];
+									'</option>';
 								}
 								echo '</select>';
 							} elseif ($attribute_type == "custom_price") {

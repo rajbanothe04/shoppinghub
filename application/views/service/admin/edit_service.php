@@ -116,7 +116,7 @@
 
 						<label><input type="checkbox" name="selected_attribute[]" class="checkbox-primary"
 								value="<?php echo $attribute->att_id; ?>" <?php foreach ($get_service_attr_by_id as $val) {
-																																								if ($val->attribute_id == "$attribute->att_id") {
+																																								if ($val->attribute_id == $attribute->att_id) {
 																																									echo " checked=\"checked\"";
 																																								};
 																																							} ?>><?php echo $attribute->att_name; ?>

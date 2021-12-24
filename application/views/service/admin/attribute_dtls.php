@@ -56,6 +56,8 @@
 								<?php $attribute_type = $attribute->att_type;
 
 									$arr = explode(",", $attribute->att_values);
+									$arr1 = explode(",", $attribute->att_custprice);
+
 									if ($attribute_type == "predefined_values") {
 
 										echo
@@ -67,7 +69,13 @@
 									} elseif ($attribute_type == "free_text") {
 										echo '<textarea id="free_txt" name="free_txt" rows="' . $attribute->att_fieldsize . '" cols=""></textarea>';
 									} elseif ($attribute_type == "rate_change") {
-										echo	'<input type="text" name="rate_change" id="rate_change">';
+										echo '<select name="rate_change" id="rate_change" class="form-control">';
+										foreach ($arr as $key => $value) {
+
+											echo '<option value="' . $key . '">' . $value . ' ' . $arr1[$key];
+											'</option>';
+										}
+										echo '</select>';
 									} elseif ($attribute_type == "custom_price") {
 										echo '<input type="text" name="custom_price" id="custom_price">';
 									} elseif ($attribute_type == "single_line_free_text") {

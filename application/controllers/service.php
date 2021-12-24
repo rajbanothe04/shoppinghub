@@ -20,6 +20,8 @@ class Service extends CI_Controller
 	public function add_service()
 	{
 		$data['all_attribute'] = $this->service_model->get_attribute_data();
+		// print_r($data['all_attribute']);
+		// exit;
 		$data['maincontent'] = $this->load->view('service/admin/add_service', $data, true);
 		$this->load->view('admin/master', $data);
 	}
@@ -46,21 +48,21 @@ class Service extends CI_Controller
 		$data['ser_activation'] = $this->input->post('ser_activation');
 
 		// unset($data['submit']);
-		$ser_id = $this->service_model->save_service($data, $id);
+		$ser_id = $this->service_model->update_service($data, $id);
 
-		$ser_attr_result = $this->service_model->save_service_attribute($id, $ser_id, $attrData);
-		if ($ser_attr_result) {
-			$this->session->set_flashdata('message', "Service added successfully");
+		$ser_attr_result = $this->service_model->update_service_attribute($id, $attrData);
+		if ($ser_attr_result && $ser_id) {
+			$this->session->set_flashdata('message', "Service Updated successfully");
 			return redirect('service');
 		} else {
-			$this->session->set_flashdata('message', "Service added Failed");
+			$this->session->set_flashdata('message', "Service Update Failed");
 			return redirect('service/add_service');
 		}
 	}
 
 	public function save_service()
 	{
-		$attrData = $this->input->post('selected_attribute');
+		// $attrData = $this->input->post('selected_attribute');
 		// print_r($attrData);
 		// exit;
 
@@ -74,14 +76,18 @@ class Service extends CI_Controller
 
 		// unset($data['submit']);
 		$ser_id = $this->service_model->save_service($data);
-
-		$ser_attr_result = $this->service_model->save_service_attribute($ser_id, $attrData);
-		if ($ser_attr_result) {
+		if ($attrData = $this->input->post('selected_attribute')) {
+			$ser_attr_result = $this->service_model->save_service_attribute($ser_id, $attrData);
+			if ($ser_attr_result) {
+				$this->session->set_flashdata('message', "Service added successfully");
+				return redirect('service');
+			} else {
+				$this->session->set_flashdata('message', "Service added Failed");
+				return redirect('service/add_service');
+			}
+		} else {
 			$this->session->set_flashdata('message', "Service added successfully");
 			return redirect('service');
-		} else {
-			$this->session->set_flashdata('message', "Service added Failed");
-			return redirect('service/add_service');
 		}
 	}
 	public function delete_service($id)
@@ -117,6 +123,8 @@ class Service extends CI_Controller
 	public function save_attribute()
 	{
 		$data = $this->input->post();
+		print_r($data);
+		exit;
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		$this->form_validation->set_rules('att_name', 'Attribute Name', 'required|is_unique|min_length[3]');
 		// $data['att_name'] = $this->input->post('att_name');
@@ -164,8 +172,8 @@ class Service extends CI_Controller
 		// $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		// $this->form_validation->set_rules('att_name', 'Attribute Name', 'required|is_unique|min_length[3]');
 		unset($data['submit']);
-		// print_r($data);
-		// exit;
+		print_r($data);
+		exit;
 		$result = $this->service_model->update_attribute($data, $id);
 		if ($result == true) {
 			$this->session->set_flashdata('message', "Attribute Update successfully");

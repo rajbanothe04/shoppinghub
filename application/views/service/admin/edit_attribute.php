@@ -98,9 +98,14 @@
 								placeholder="" />
 						</div>
 						<div class="form-group">
-							<input type="checkbox" id="mandatory" class="form-control" value="1"
-								name="mandatory">Service
-							Activation: Yes
+							<input type="checkbox" id="mandatory" class="form-control" value="Yes" name="mandatory" <?php if ($get_attribute_data->mandatory == "Yes") {
+																														echo " checked=\"checked\""; // echo 'checked="checked"';
+																													} ?> />Mandotory: Yes
+						</div><br>
+						<div class="form-group">
+							<input type="checkbox" id="hide_price" class="form-control" value="Yes" name="hide_price" <?php if ($get_attribute_data->hide_price == "Yes") {
+																															echo " checked=\"checked\""; // echo 'checked="checked"';
+																														} ?>>Hide Price: Yes
 						</div><br>
 						<hr>
 						<div style="text-align: center"><input type="submit" name="submit" value="Update Attribute"
@@ -169,5 +174,6 @@ $(document).ready(function() {
 			$('#attribute_field_size').hide();
 		}
 	});
+
 });
 </script>
