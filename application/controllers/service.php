@@ -124,6 +124,7 @@ class Service extends CI_Controller
 	{
 		$data = $this->input->post();
 		print_r($data);
+		__LINE__;
 		exit;
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		$this->form_validation->set_rules('att_name', 'Attribute Name', 'required|is_unique|min_length[3]');
@@ -172,8 +173,13 @@ class Service extends CI_Controller
 		// $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		// $this->form_validation->set_rules('att_name', 'Attribute Name', 'required|is_unique|min_length[3]');
 		unset($data['submit']);
-		print_r($data);
-		exit;
+		// print_r($data);
+		// exit;
+		if(isset($data['mandatory'])){
+			$data['mandatory']='Yes';
+		}else{
+			$data['mandatory']='No';
+		}
 		$result = $this->service_model->update_attribute($data, $id);
 		if ($result == true) {
 			$this->session->set_flashdata('message', "Attribute Update successfully");

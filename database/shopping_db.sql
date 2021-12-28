@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 21, 2021 at 03:57 PM
+-- Generation Time: Dec 24, 2021 at 01:16 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -32,36 +32,44 @@ CREATE TABLE IF NOT EXISTS `attribute` (
   `att_id` int(11) NOT NULL AUTO_INCREMENT,
   `att_name` varchar(100) NOT NULL,
   `att_type` varchar(50) NOT NULL,
-  `att_values` varchar(255) DEFAULT NULL,
+  `att_values` varchar(2000) DEFAULT NULL,
   `att_fieldsize` varchar(50) DEFAULT NULL,
-  `att_custprice` varchar(50) DEFAULT NULL,
+  `att_custprice` varchar(1000) DEFAULT NULL,
   `mandatory` varchar(3) DEFAULT 'No',
+  `hide_price` varchar(3) DEFAULT 'No',
   PRIMARY KEY (`att_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=165 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `attribute`
 --
 
-INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fieldsize`, `att_custprice`, `mandatory`) VALUES
-(15, 'Choose Editing Type', 'radio_type', 'Black & White, color', '', '', 'Yes'),
-(14, 'Customize Service', 'rate_change', 'Please Select,1,2,3,4,5,6,7,8,9,10', '', '', 'No'),
-(29, 'Additional Information', 'free_text', '', '2', '', 'No'),
-(12, 'Type of Shoot', 'predefined_values', 'Please Select,Wedding/Event,Portrait,Commercial,Stock,Real Estate', '', '', 'Yes'),
-(11, 'Order Name', 'single_line_free_text', '', '', '', 'Yes'),
-(17, 'White Balance', 'predefined_values', 'Neural,Cool,Warm', '', '', 'Yes'),
-(18, 'Would you like Photographer Editor', 'radio_type', 'Yes,No', '', '', 'No'),
-(19, 'Number of Images to be Uploaded', 'predefined_values', '1,2,3,4,5,6,7,8,9,10', '', '', 'No'),
-(20, 'Include Color-correction?', 'predefined_values', 'No color correction, Color correct all the images to the following Editing style.', '', '', 'No'),
-(21, 'Number of images to be submitted', 'single_line_free_text', '', '', '', 'Yes'),
-(22, 'What editing style would you like applied to this order? ', 'predefined_values', 'PE Standard, PE FIlm,PE Dark & Moody, PE Light & Airy,PE Warm Creamy,Custom', '', '', 'Yes'),
-(23, 'Describe the work to be done, per image:', 'single_line_free_text', '', '', '', 'No'),
-(24, 'Return file format  ', 'predefined_values', 'Download Flattened JPGs,Download Layered PSDs', '', '', 'Yes'),
-(25, 'Gallery Upload Details ', 'single_line_free_text', '', '', '', 'No'),
-(26, 'Pre-approved amount (Optional)', 'single_line_free_text', '', '', '', 'No'),
-(27, 'Discount Details', 'predefined_values', '', '', '', 'No'),
-(28, 'Code', 'single_line_free_text', '', '', '', 'No'),
-(13, 'Choose Filter', 'checkbox_type', 'Blemish Removal,Skin Smoothing,Flyaway Hairs (across face, 2 people max),Braces Removal,Eyeglass Glare Removal,Skin Smoothing (body, including face),Background Swap (include support image for sky),Face/Head Swap (2 people max)', '', '', 'No');
+INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fieldsize`, `att_custprice`, `mandatory`, `hide_price`) VALUES
+(152, 'Background Color', 'predefined_values', 'Please Select, All Black, All White, Mixture of Black and White', '', '', 'Yes', 'No'),
+(151, 'Delivery Options', 'predefined_values', 'Upload - Download Images Only', '', '', 'No', 'No'),
+(150, 'White Balance', 'predefined_values', 'Neutral, Cool, Warm', '', '', 'No', 'No'),
+(140, 'Order Name', 'single_line_free_text', '', '', '', 'Yes', 'No'),
+(141, 'Number of images to be submitted', 'single_line_free_text', '', '', '', 'Yes', 'No'),
+(142, 'Type of Shoot', 'predefined_values', 'Please Select, Wedding/Event, Portrait, Commercial, Stock, Real Estate', '', '', 'Yes', 'No'),
+(143, 'What editing style would you like applied to this order?', 'predefined_values', 'Please Select, PE Standard, PE Film, PE Dark & Moody, PE Light & Airy, PE Warm & Creamy, Custom - [name1], Custom - [name2], Custom - [name3]', '', '', 'No', 'No'),
+(144, 'Return file format', 'predefined_values', 'Download flattened JPGs, Download layered PSDs', '', '', 'No', 'No'),
+(145, 'Would you like Lightroom Retouching (flag images yellow)?', 'predefined_values', 'Please Select, Yes -  I would like Basic Retouching in LR ($1.50/img), Yes -  I would like Advanced Retouching in LR ($3.00/img), No -  I don\'t need any Retouching to be done in LR', '', '', 'Yes', 'No'),
+(146, 'Have you included the data file (.lrcat-data) file?', 'predefined_values', 'Please Select, Yes, No', '', '', 'No', 'No'),
+(147, 'Percentage to be Removed', 'rate_change', '80%, 70%, 60%, 50%', '', '0.13000, 0.13000, 0.14000, 0.15000', 'No', 'No'),
+(148, 'What editing style would you like applied to this order?', 'predefined_values', 'Please Select, PE Standard, PE Film, PE Dark & Moody, PE Light & Airy, PE Warm & Creamy, Custom - [name1], Custom - [name2], Custom - [name3], Use the edited images in my Lightroom catalog as reference', '', '', 'No', 'Yes'),
+(149, 'Black & White', 'predefined_values', 'Please Select, No B&W, B&W Conversion (no corresponding color version), B&W Copies (includes b&w and color version)-($0.05/image extra)', '', '', 'Yes', 'No'),
+(153, 'Output Format', 'rate_change', 'JPEG, Layered PSD', '', '0.00000, 25.00000', 'No', 'No'),
+(154, 'Blemish Removal', 'checkbox_type', '', '', '1.00000', 'No', 'No'),
+(155, 'Skin Smoothing (face)', 'checkbox_type', '', '', '1.00000', 'No', 'No'),
+(156, 'Flyaway Hairs (across face, 2 people max)', 'checkbox_type', '', '', '5.00000', 'No', 'No'),
+(157, 'Braces Removal', 'checkbox_type', '', '', '4.00000', 'No', 'No'),
+(158, 'Eyeglass Glare Removal', 'checkbox_type', '', '', '4.00000', 'No', 'No'),
+(159, 'Skin Smoothing (body, including face)', 'checkbox_type', '', '', '9.00000', 'No', 'No'),
+(160, 'Background Swap (include support image for sky)', 'checkbox_type', '', '', '8.00000', 'No', 'No'),
+(161, 'Face/Head Swap (2 people max)', 'checkbox_type', '', '', '11.00000', 'No', 'No'),
+(162, 'File name(s)', 'free_text', '', '', '', 'No', 'No'),
+(163, 'Return file format', 'predefined_values', 'Download flattened JPGs, Download layered PSDs', '', '', 'No', 'No'),
+(164, 'Upload retouched files to gallery', 'rate_change', 'No, Upload to PASS - Enter Gallery Upload Details, Upload to PASS Plus - Enter Gallery Upload Details, Upload to ShootProof - Enter Gallery Upload Details, Upload to Smugmug - Enter Gallery Upload Details, Upload to Zenfolio - Enter Gallery Upload Details, Upload to Other - Enter Gallery Upload Details', '', '0.00000, 0.00000, 0.00000, 10.00000, 10.00000, 10.00000, 10.00000', 'No', 'No');
 
 -- --------------------------------------------------------
 
@@ -1354,16 +1362,14 @@ CREATE TABLE IF NOT EXISTS `service` (
   `ser_qty` int(11) NOT NULL,
   `ser_activation` varchar(10) DEFAULT 'No',
   PRIMARY KEY (`ser_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service`
 --
 
 INSERT INTO `service` (`ser_id`, `ser_name`, `ser_description`, `ser_ternaround`, `ser_type`, `ser_cust_price`, `ser_qty`, `ser_activation`) VALUES
-(7, 'Photoshop Retouching', 'Photoshop Retouching', 2, 'standard', 2, 1, 'Yes'),
-(8, 'Custom Presets', 'Custom Presets', 1, 'standard', 1, 1, 'No'),
-(9, 'Retouching - A La Carte', 'Retouching - A La Carte', 2, 'standard', 2, 1, 'Yes');
+(73, 'Photoshop Retouching', '', 1, 'standard', 0, 1, 'Yes');
 
 -- --------------------------------------------------------
 
@@ -1377,25 +1383,31 @@ CREATE TABLE IF NOT EXISTS `service_attribute` (
   `service_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_attribute`
 --
 
 INSERT INTO `service_attribute` (`id`, `service_id`, `attribute_id`) VALUES
-(15, 7, 11),
-(16, 7, 12),
-(17, 7, 13),
-(18, 7, 15),
-(19, 7, 14),
-(20, 7, 17),
-(21, 7, 18),
-(27, 7, 29),
-(23, 9, 11),
-(24, 9, 13),
-(25, 9, 14),
-(26, 9, 17);
+(225, 73, 164),
+(220, 73, 159),
+(219, 73, 158),
+(218, 73, 157),
+(217, 73, 156),
+(216, 73, 155),
+(215, 73, 154),
+(214, 73, 153),
+(213, 73, 149),
+(224, 73, 163),
+(223, 73, 162),
+(222, 73, 161),
+(221, 73, 160),
+(212, 73, 144),
+(211, 73, 142),
+(210, 73, 141),
+(209, 73, 140),
+(208, 73, 150);
 
 -- --------------------------------------------------------
 

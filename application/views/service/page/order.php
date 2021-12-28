@@ -19,8 +19,8 @@
 			<select name="service" id="service" class="form-control" required>
 				<option value="">Select Service</option>
 				<?php foreach ($service_content as $service) {
-					echo '<option value="' . $service->ser_id . '">' . $service->ser_name . '</option>';
-				} ?>
+                    echo '<option value="' . $service->ser_id . '">' . $service->ser_name . '</option>';
+                } ?>
 			</select>
 			<p></p>
 			<input type="text" style="width: 100%; height:40px" name="no_of_image"
