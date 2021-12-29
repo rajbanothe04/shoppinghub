@@ -123,9 +123,9 @@ class Service extends CI_Controller
 	public function save_attribute()
 	{
 		$data = $this->input->post();
-		print_r($data);
-		__LINE__;
-		exit;
+		// print_r($data);
+		// __LINE__;
+		// exit;
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		$this->form_validation->set_rules('att_name', 'Attribute Name', 'required|is_unique|min_length[3]');
 		// $data['att_name'] = $this->input->post('att_name');

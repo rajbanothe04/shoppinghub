@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 24, 2021 at 01:16 PM
+-- Generation Time: Dec 29, 2021 at 04:24 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -57,7 +57,7 @@ INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fi
 (146, 'Have you included the data file (.lrcat-data) file?', 'predefined_values', 'Please Select, Yes, No', '', '', 'No', 'No'),
 (147, 'Percentage to be Removed', 'rate_change', '80%, 70%, 60%, 50%', '', '0.13000, 0.13000, 0.14000, 0.15000', 'No', 'No'),
 (148, 'What editing style would you like applied to this order?', 'predefined_values', 'Please Select, PE Standard, PE Film, PE Dark & Moody, PE Light & Airy, PE Warm & Creamy, Custom - [name1], Custom - [name2], Custom - [name3], Use the edited images in my Lightroom catalog as reference', '', '', 'No', 'Yes'),
-(149, 'Black & White', 'predefined_values', 'Please Select, No B&W, B&W Conversion (no corresponding color version), B&W Copies (includes b&w and color version)-($0.05/image extra)', '', '', 'Yes', 'No'),
+(149, 'Black & White', 'predefined_values', 'Please Select,No B&W, B&W Conversion (no corresponding color version), B&W Copies (includes b&w and color version)', '', '', 'Yes', 'No'),
 (153, 'Output Format', 'rate_change', 'JPEG, Layered PSD', '', '0.00000, 25.00000', 'No', 'No'),
 (154, 'Blemish Removal', 'checkbox_type', '', '', '1.00000', 'No', 'No'),
 (155, 'Skin Smoothing (face)', 'checkbox_type', '', '', '1.00000', 'No', 'No'),
@@ -68,8 +68,22 @@ INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fi
 (160, 'Background Swap (include support image for sky)', 'checkbox_type', '', '', '8.00000', 'No', 'No'),
 (161, 'Face/Head Swap (2 people max)', 'checkbox_type', '', '', '11.00000', 'No', 'No'),
 (162, 'File name(s)', 'free_text', '', '', '', 'No', 'No'),
-(163, 'Return file format', 'predefined_values', 'Download flattened JPGs, Download layered PSDs', '', '', 'No', 'No'),
-(164, 'Upload retouched files to gallery', 'rate_change', 'No, Upload to PASS - Enter Gallery Upload Details, Upload to PASS Plus - Enter Gallery Upload Details, Upload to ShootProof - Enter Gallery Upload Details, Upload to Smugmug - Enter Gallery Upload Details, Upload to Zenfolio - Enter Gallery Upload Details, Upload to Other - Enter Gallery Upload Details', '', '0.00000, 0.00000, 0.00000, 10.00000, 10.00000, 10.00000, 10.00000', 'No', 'No');
+(164, 'Upload retouched files to gallery', 'rate_change', 'No, Upload to PASS - Enter Gallery Upload Details, Upload to PASS Plus - Enter Gallery Upload Details, Upload to ShootProof - Enter Gallery Upload Details, Upload to Smugmug - Enter Gallery Upload Details, Upload to Zenfolio - Enter Gallery Upload Details, Upload to Other - Enter Gallery Upload Details', '', '0.00000, 0.00000, 0.00000, 10.00000, 15.00000, 10.00000, 10.00000', 'No', 'No');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_values`
+--
+
+DROP TABLE IF EXISTS `attribute_values`;
+CREATE TABLE IF NOT EXISTS `attribute_values` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  `attribute_value` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -80,13 +94,20 @@ INSERT INTO `attribute` (`att_id`, `att_name`, `att_type`, `att_values`, `att_fi
 DROP TABLE IF EXISTS `card`;
 CREATE TABLE IF NOT EXISTS `card` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `card` varchar(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
+  `card_number` varchar(16) NOT NULL,
   `cvv` int(11) NOT NULL,
-  `card_number` int(11) NOT NULL,
   `exp_month` int(2) NOT NULL,
   `exp_year` year(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `card`
+--
+
+INSERT INTO `card` (`id`, `user_id`, `card_number`, `cvv`, `exp_month`, `exp_year`) VALUES
+(1, '37', '1111222233334444', 111, 11, 2025);
 
 -- --------------------------------------------------------
 
@@ -1383,31 +1404,30 @@ CREATE TABLE IF NOT EXISTS `service_attribute` (
   `service_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=243 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_attribute`
 --
 
 INSERT INTO `service_attribute` (`id`, `service_id`, `attribute_id`) VALUES
-(225, 73, 164),
-(220, 73, 159),
-(219, 73, 158),
-(218, 73, 157),
-(217, 73, 156),
-(216, 73, 155),
-(215, 73, 154),
-(214, 73, 153),
-(213, 73, 149),
-(224, 73, 163),
-(223, 73, 162),
-(222, 73, 161),
-(221, 73, 160),
-(212, 73, 144),
-(211, 73, 142),
-(210, 73, 141),
-(209, 73, 140),
-(208, 73, 150);
+(242, 73, 164),
+(241, 73, 163),
+(240, 73, 162),
+(239, 73, 161),
+(238, 73, 160),
+(237, 73, 159),
+(236, 73, 158),
+(235, 73, 157),
+(234, 73, 156),
+(233, 73, 155),
+(232, 73, 154),
+(231, 73, 149),
+(230, 73, 144),
+(229, 73, 142),
+(228, 73, 141),
+(227, 73, 140),
+(226, 73, 150);
 
 -- --------------------------------------------------------
 
@@ -1719,6 +1739,24 @@ INSERT INTO `tbl_order_details` (`order_details_id`, `customer_id`, `order_id`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_order_service_details`
+--
+
+DROP TABLE IF EXISTS `tbl_order_service_details`;
+CREATE TABLE IF NOT EXISTS `tbl_order_service_details` (
+  `order_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  `attribute_value` varchar(255) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`order_details_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_payment`
 --
 
@@ -1827,6 +1865,44 @@ INSERT INTO `tbl_role` (`role_id`, `role_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_service_order`
+--
+
+DROP TABLE IF EXISTS `tbl_service_order`;
+CREATE TABLE IF NOT EXISTS `tbl_service_order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `order_total` float NOT NULL,
+  `disc_amount` float NOT NULL,
+  `dis_type` varchar(50) NOT NULL,
+  `grand_tot` float NOT NULL,
+  `action` varchar(20) NOT NULL DEFAULT 'pending',
+  `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_service_payment`
+--
+
+DROP TABLE IF EXISTS `tbl_service_payment`;
+CREATE TABLE IF NOT EXISTS `tbl_service_payment` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) NOT NULL,
+  `total` float NOT NULL,
+  `card_number` varchar(16) NOT NULL,
+  `cvv` int(11) NOT NULL,
+  `exp_month` int(2) NOT NULL,
+  `exp_year` year(4) NOT NULL,
+  PRIMARY KEY (`payment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_shipping`
 --
 
@@ -1847,7 +1923,7 @@ CREATE TABLE IF NOT EXISTS `tbl_shipping` (
   `grand_tot` float NOT NULL,
   `shipping_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`shipping_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_shipping`
@@ -1864,7 +1940,8 @@ INSERT INTO `tbl_shipping` (`shipping_id`, `customer_id`, `shipping_name`, `ship
 (59, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 615, 0, '', 615, '2021-12-14 11:19:51'),
 (60, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 30, 25, 'percent', 22.5, '2021-12-14 11:19:51'),
 (61, 37, 'Navin Yele', 'navinyele@gmail.com', 'Seoni', 'Seoni', 'India', '8855447722', '440028', 168, 25, 'percent', 126, '2021-12-14 11:19:51'),
-(63, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 190, 190, 'amount', 0, '2021-12-14 11:19:51');
+(63, 37, 'Navin Yele', 'navinyele@gmail.com', 'Gondia', 'Gondia', 'India', '8855447722', '440028', 190, 190, 'amount', 0, '2021-12-14 11:19:51'),
+(64, 37, 'Navin Yele', 'navinyele123@gmail.com', 'Nagpur', 'Nagpur', 'India', '1122445577', '440028', 700, 0, '', 700, '2021-12-28 13:55:43');
 
 -- --------------------------------------------------------
 
@@ -1891,6 +1968,32 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
 INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_role`, `created_time`, `updated_time`) VALUES
 (1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500', 1, '2021-12-02 11:13:43', '2021-12-02 11:13:43'),
 (2, 'Admin1', 'admin1@admin.com', '0192023a7bbd73250516f069df18b500', 1, '2021-12-02 11:13:43', '2021-12-02 11:13:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_user_order_details`
+--
+
+DROP TABLE IF EXISTS `tbl_user_order_details`;
+CREATE TABLE IF NOT EXISTS `tbl_user_order_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `payment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `zipcode` varchar(20) NOT NULL,
+  `order_total` float NOT NULL,
+  `disc_amount` float NOT NULL,
+  `dis_type` varchar(50) NOT NULL,
+  `grand_tot` float NOT NULL,
+  `shipping_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

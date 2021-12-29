@@ -12,11 +12,11 @@
 <body>
 	<div class="container" style="border: 1px solid black">
 
-		<form method="post" action="<?php echo base_url('service_public/save_order'); ?>">
+		<form method="post" action="<?php echo base_url('service_public/save_details'); ?>">
 			<div class="row">
 				<div class="col-lg-6">
 					<center>
-						<h3><b>Your Shipping Address</b></h3>
+						<h3><b>Your Address</b></h3>
 					</center>
 
 					<table>
@@ -80,11 +80,11 @@
 						<table style="float:right;text-align:center;" width="80%">
 							<tr>
 								<th>Card Number: </th>
-								<td><input type="text" name="cardno" id="cardno" placeholder="xxxx-xxxx-xxxx-xxxx" size="23" /></td>
+								<td><input type="text" name="card_number" id="card_number" placeholder="xxxx-xxxx-xxxx-xxxx" size="23" /></td>
 							</tr>
 							<tr>
 								<th>Expiration Date:</th>
-								<td><input type="numeric" name="cvv" id="cvv" size="10" placeholder="mm" />&nbsp;<input type="numeric" name="cvv" id="cvv" size="10" placeholder="yyyy" /></td>
+								<td><input type="text" name="exp_month" id="exp_month" size="10" placeholder="mm" />&nbsp;<input type="text" name="exp_year" id="exp_year" size="10" placeholder="yyyy" /></td>
 
 							</tr>
 							<tr>
@@ -94,10 +94,10 @@
 						</table>
 					</div>
 				</div>
-				<input type="hidden" id="sub-tot" name="sub-tot">
-				<input type="hidden" id="disc-amount" name="disc-amount">
-				<input type="hidden" id="grand-tot" name="grand-tot">
-				<input type="hidden" id="dis-type" name="dis-type">
+				<input type="hidden" id="sub-tot" name="sub-tot" value="<?=$order_total  ;?>">
+				<input type="hidden" id="disc-amount" name="disc-amount" value="<?=$disc_amount  ;?>">
+				<input type="hidden" id="grand-tot" name="grand-tot" value="<?=$grand_tot  ;?>">
+				<input type="hidden" id="dis-type" name="dis-type" value="<?=$dis_type  ;?>">
 
 			</div>
 			<center>

@@ -8,6 +8,6 @@ class Adminlogin_Model extends CI_Model
         $this->db->from('tbl_user');
         $this->db->where($data);
         $info          = $this->db->get();
-        return $result = $info->row();
+        return $info->row();
     }
 }
