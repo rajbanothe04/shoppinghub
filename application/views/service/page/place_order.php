@@ -13,6 +13,7 @@
 	<div class="container" style="border: 1px solid black">
 
 		<form method="post" action="<?php echo base_url('service_public/save_details'); ?>">
+			<?php echo validation_errors(); ?>
 			<div class="row">
 				<div class="col-lg-6">
 					<center>
@@ -94,10 +95,10 @@
 						</table>
 					</div>
 				</div>
-				<input type="hidden" id="sub-tot" name="sub-tot" value="<?=$order_total  ;?>">
-				<input type="hidden" id="disc-amount" name="disc-amount" value="<?=$disc_amount  ;?>">
-				<input type="hidden" id="grand-tot" name="grand-tot" value="<?=$grand_tot  ;?>">
-				<input type="hidden" id="dis-type" name="dis-type" value="<?=$dis_type  ;?>">
+				<input type="hidden" id="sub-tot" name="sub-tot" value="<?= $order_total; ?>">
+				<input type="hidden" id="disc-amount" name="disc-amount" value="<?= $disc_amount; ?>">
+				<input type="hidden" id="grand-tot" name="grand-tot" value="<?= $grand_tot; ?>">
+				<input type="hidden" id="dis-type" name="dis-type" value="<?= $dis_type; ?>">
 
 			</div>
 			<center>

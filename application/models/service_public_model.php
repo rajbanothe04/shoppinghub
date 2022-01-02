@@ -87,4 +87,34 @@ class Service_Public_model extends CI_Model
 		$result = $this->db->query($query);
 		return $result;
 	}
+	public function get_my_order($id)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_service_order');
+		$this->db->join('tbl_order_service_details', 'tbl_order_service_details.attribute_id=140');
+		$this->db->join('service', 'service.ser_id=tbl_order_service_details.service_id');
+		$this->db->where('tbl_service_order.user_id', $id);
+		$this->db->order_by('tbl_order_service_details.order_id', 'asc');
+		$this->db->group_by('tbl_order_service_details.order_id'); //for unique record as per defined like order_id
+		$info = $this->db->get();
+		// echo "<pre>";
+		// print_r($info->result());
+		// echo "</pre>";
+		// __LINE__;
+		// exit;
+		return $info->result();
+	}
+	public function get_user_order_det_by_id($id)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_order_service_details');
+		$this->db->where('tbl_order_service_details.order_id', $id);
+		$this->db->join('attribute', 'attribute.att_id=tbl_order_service_details.attribute_id');
+		$this->db->join('service', 'service.ser_id=tbl_order_service_details.service_id');
+		$this->db->join('tbl_user_order_details', 'tbl_user_order_details.payment_id=tbl_order_service_details.order_id');
+		$this->db->order_by('tbl_order_service_details.attribute_id', 'ASC');
+		// $this->db->group_by('tbl_order_service_details.order_id', $id);
+		$info = $this->db->get();
+		return $info->result();
+	}
 }

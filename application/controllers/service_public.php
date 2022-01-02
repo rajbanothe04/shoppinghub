@@ -80,14 +80,18 @@ class Service_Public extends CI_Controller
 	}
 	public function save_details()
 	{
-		// $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
-		// $this->form_validation->set_rules('shipping_name', 'Shipping Name', 'trim|required');
-		// $this->form_validation->set_rules('shipping_email', 'Shipping Email', 'trim|required|valid_email');
-		// $this->form_validation->set_rules('shipping_address', 'Shipping Address', 'trim|required');
-		// $this->form_validation->set_rules('shipping_city', 'Shipping City', 'trim|required');
-		// $this->form_validation->set_rules('shipping_country', 'Shipping Country', 'trim|required');
-		// $this->form_validation->set_rules('shipping_phone', 'Shipping Phone', 'trim|required');
-		// $this->form_validation->set_rules('shipping_zipcode', 'Shipping Zipcode', 'trim|required');
+		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+		$this->form_validation->set_rules('shipping_name', 'Shipping Name', 'required');
+		$this->form_validation->set_rules('shipping_email', 'Shipping Email', 'required');
+		$this->form_validation->set_rules('shipping_address', 'Shipping Address', 'required');
+		$this->form_validation->set_rules('shipping_city', 'Shipping City', 'required');
+		$this->form_validation->set_rules('shipping_country', 'Shipping Country', 'required');
+		$this->form_validation->set_rules('shipping_phone', 'Shipping Phone', 'required');
+		$this->form_validation->set_rules('shipping_zipcode', 'Shipping Zipcode', 'required');
+		$this->form_validation->set_rules('card_number', 'Card Number', 'required');
+		$this->form_validation->set_rules('exp_month', 'Exp Month', 'required');
+		$this->form_validation->set_rules('cvv', 'CVV', 'required');
+		$this->form_validation->set_rules('exp_year', 'Exp Year', 'required');
 
 		$shipp_data                     = array();
 		$shipp_data['user_id']      = $this->session->userdata('user_id');
@@ -111,7 +115,7 @@ class Service_Public extends CI_Controller
 
 		$payment_id = $this->service_public_model->verify_card_details($id, $card_no, $cvv, $exp_month, $exp_year, $total);
 
-		if ($payment_id) {
+		if ($this->form_validation->run() == TRUE){
 			$shipp_data['payment_id']      = $payment_id;
 			$result = $this->service_public_model->save_user_details($shipp_data);
 
@@ -167,5 +171,30 @@ class Service_Public extends CI_Controller
 		$this->load->view('auth/service first_header');
 		$this->load->view('auth/service_second_header');
 		$this->load->view('service/page/service_success');
+	}
+	public function my_account()
+	{
+		$id = $this->session->userdata('user_id');
+		$data = array();
+		$data['order_details'] = $this->service_public_model->get_my_order($id);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// __LINE__;
+		// exit;
+		$this->load->view('auth/service first_header');
+		$this->load->view('auth/service_second_header');
+		$this->load->view('service/page/my_account', $data);
+	}
+	public function get_order_details()
+	{
+
+		$id = $this->input->post('rowid');
+		$data = $this->service_public_model->get_user_order_det_by_id($id);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit;
+		echo json_encode($data);
 	}
 }

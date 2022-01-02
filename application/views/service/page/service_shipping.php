@@ -26,7 +26,7 @@
 										<th width="10%">Sr.No.</th>
 										<th width="40%">Service Name</th>
 										<th width="20%">Total Images submitted</th>
-										<th width="30%">Total Price</th>
+										<th width="30%">Total</th>
 
 									</tr>
 									<?php
@@ -89,7 +89,7 @@
 				<input type="hidden" id="disc-amount" name="disc-amount">
 				<input type="hidden" id="grand-tot" name="grand-tot">
 				<input type="hidden" id="dis-type" name="dis-type">
-				<button class="grey" id="submit">Order Place</button>
+				<button class="grey" id="submit">Process Continue</button>
 			</form>
 		</div>
 	</center>

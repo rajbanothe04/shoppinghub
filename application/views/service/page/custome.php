@@ -32,13 +32,13 @@
                     if ($attribute_type == "predefined_values") {
                         echo '<label style="margin-top: -20px";>' . $attribute->att_name . ' :</label><br>';
                         echo
-                        '<select name="attribute[' . $attribute->att_id.']" id="att_type" class="form-control">';
+                        '<select name="attribute[' . $attribute->att_id . ']" id="att_type" class="form-control">';
                         foreach ($arr as $key => $value) {
                             echo '<option value="' . $value . '" >' . $value . '</option>';
                         }
                         echo '</select><hr>';
                     } elseif ($attribute_type == "checkbox_type") {
-                        echo '<input type="checkbox" name="attribute[' . $attribute->att_id.']" class="amount" value="' . $attribute->att_name;
+                        echo '<input type="checkbox" name="attribute[' . $attribute->att_id . ']" class="amount" value="' . $attribute->att_name;
                         echo '" id="checkbox_type"  onclick="$(this).MessageBox(' . $attribute->att_custprice . ');">&nbsp&nbsp<label> ' . $attribute->att_name . '</label>
 						<span>($' . round($attribute->att_custprice) . ')
 						</span><hr style="margin-top: 5px;margin-bottom: 5px">';
@@ -46,16 +46,16 @@
                         echo '<label style="margin-top: -15px";>' . $attribute->att_name . ' :</label><br>';
                         //Conditon for number of images to be submited
                         if ($attribute->att_name == "Number of images to be submitted") {
-                            echo    '<input type="number" name="no_of_image" value="' . $no_of_image . '" id="image_val" style="width: 100%" required><hr>';
+                            echo    '<input type="number" name="no_of_image" value="' . $no_of_image . '" id="image_val" style="width: 100%"><hr>';
                         } else {
-                            echo    '<input type="text" name="attribute[' . $attribute->att_id.']" id="single_line" style="width: 100%" required><hr>';
+                            echo    '<input type="text" name="attribute[' . $attribute->att_id . ']" id="single_line" style="width: 100%"><hr>';
                         }
                     } elseif ($attribute_type == "free_text") {
                         echo '<label style="margin-top: -15px";>' . $attribute->att_name . ' :</label><br>';
-                        echo '<textarea id="free_txt" style="width: 100%" name="attribute[' . $attribute->att_id.']" rows="' . $attribute->att_fieldsize . '" cols=""></textarea><hr>';
+                        echo '<textarea id="free_txt" style="width: 100%" name="attribute[' . $attribute->att_id . ']" rows="' . $attribute->att_fieldsize . '" cols=""></textarea><hr>';
                     } elseif ($attribute_type == "rate_change") {
                         echo '<label style="margin-top: 5px";>' . $attribute->att_name . ' :</label><br>';
-                        echo '<select name="attribute[' . $attribute->att_id.']" id="rate_change" class="form-control" onchange="$(this).dropdownCal(this)">';
+                        echo '<select name="attribute[' . $attribute->att_id . ']" id="rate_change" class="form-control" onchange="$(this).dropdownCal(this)">';
                         foreach ($arr as $key => $value) {
                             if ($attribute->hide_price == "No") {
                                 echo '<option value="' . $arr1[$key] . '">' . $value . ' ' . $arr1[$key];
@@ -65,15 +65,14 @@
                             '</option>';
                         }
                         echo '</select><hr>';
-                    } 
-                    elseif ($attribute_type == "custom_price") {
+                    } elseif ($attribute_type == "custom_price") {
                         echo '<label style="margin-top: -15px";>' . $attribute->att_name . ' :</label><br>';
-                        echo '<input type="text" name="attribute[' . $attribute->att_id.']" id="custom_price" style="width: 100%"><hr>';
+                        echo '<input type="text" name="attribute[' . $attribute->att_id . ']" id="custom_price" style="width: 100%"><hr>';
                     } elseif ($attribute_type == "radio_type") {
                         echo '<label style="margin-top: -15px";>' . $attribute->att_name . ' :</label><br>';
                         foreach ($arr as $key => $value) {
 
-                            echo $value . ' &nbsp <input type="radio" id="radio_type" name="attribute[' . $attribute->id.']" value="' . $value . '">&nbsp';
+                            echo $value . ' &nbsp <input type="radio" id="radio_type" name="attribute[' . $attribute->id . ']" value="' . $value . '">&nbsp';
                         }
                         echo '<hr>';
                     }
@@ -85,6 +84,7 @@
             <div style="text-align:center">
                 <input type="submit" name="submit" id="btn-submit" value="ADD TO CART">
             </div><br>
+            <?php echo validation_errors(); ?>
         </form>
     </div>
 </body>
